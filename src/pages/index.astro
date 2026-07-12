@@ -7,7 +7,7 @@ import CircuitChip from '@/components/circuitchip.astro';
 ---
 
 <Layout>
-	<div style=" display: flex;  position:relative; justify-content: center; align-items: center; height: 100vh; box-shadow: 0px 0px 32px rgba(32, 26, 27, 0.25);
+	<div style=" display: flex;  position:relative; justify-content: center; align-items: center; height: 100vh
  ">
 		<div class="hero-container">
 
@@ -37,12 +37,17 @@ import CircuitChip from '@/components/circuitchip.astro';
 		animation: openLayout 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 	}
 
-	.chip{
+	.chip {
 		position: absolute;
-		top: -110;
-		right: -240;
-		z-index: 1; /* above .hero (z-index: 2) */
-		width: 400px; /* or whatever size you want */
+		top: -110px;
+		right: -240px;
+		z-index: 1;
+		width: 400px;
+	}
+
+	.chip :global(.circuit-svg) {
+		max-width: none;
+		width: 100%;
 	}
 
 	.hero-underlay {
