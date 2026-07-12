@@ -3,13 +3,15 @@ import Layout from '../layouts/Page.astro';
 import {Image} from 'astro:assets';
 import homeCard from '@/assets/home_card.png'
 import Socials from '@/components/socials.astro';
+import CircuitChip from '@/components/circuitchip.astro';
 ---
 
 <Layout>
-	<div style=" display: flex; justify-content: center; align-items: center; height: 100vh; box-shadow: 0px 0px 32px rgba(32, 26, 27, 0.25);
+	<div style=" display: flex;  position:relative; justify-content: center; align-items: center; height: 100vh; box-shadow: 0px 0px 32px rgba(32, 26, 27, 0.25);
  ">
 		<div class="hero-container">
-		<div class="hero-underlay"></div>
+
+			<div class="hero-underlay"></div>
 
 			<div class="hero">
 				<Image src={homeCard}  alt="Main page" />
@@ -18,7 +20,13 @@ import Socials from '@/components/socials.astro';
 
 				</div>
 			</div>
+			
+			<div class="chip">
+				<CircuitChip />
+			</div>
 		</div>
+		
+
 	</div>
 </Layout>
 
@@ -26,8 +34,16 @@ import Socials from '@/components/socials.astro';
 	.hero-container {
 		width: 65%;
 		position: relative;
-		
 		animation: openLayout 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+		background-color: black;
+	}
+
+	.chip{
+		position: absolute;
+		top: -110;
+		right: -240;
+		z-index: 1; /* above .hero (z-index: 2) */
+		width: 400px; /* or whatever size you want */
 	}
 
 	.hero-underlay {

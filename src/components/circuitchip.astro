@@ -1,0 +1,193 @@
+---
+// SynchronizedChipFixed.astro
+---
+
+<div class="chip-container">
+  <!-- Padded viewBox: strokes/nodes/glow sit on x=0 and near y=0 and would clip otherwise -->
+  <svg viewBox="-60 -60 680 600" class="circuit-svg" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+    <defs>
+      <linearGradient id="trace-gradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="550" y2="460">
+        <stop offset="0%" stop-color="#3E3F29" />
+        <stop offset="100%" stop-color="#DBCEA5" />
+      </linearGradient>
+
+      <filter id="glow" filterUnits="userSpaceOnUse" x="-80" y="-80" width="720" height="640">
+        <feGaussianBlur stdDeviation="6" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <rect class="chip-center" x="142.5" y="142.5" width="200" height="200" rx="12" />
+
+    <g class="traces">
+      <path class="trace thin" pathLength="100" d="M 172.5 142.5 L 172.5 80 L 130 50" />
+      <path class="trace thick" pathLength="100" d="M 212.5 142.5 L 212.5 10" />
+      <path class="trace thin" pathLength="100" d="M 272.5 142.5 L 272.5 70 L 320 45" />
+      <path class="trace medium" pathLength="100" d="M 312.5 142.5 L 312.5 90" />
+
+      <path class="trace thin" pathLength="100" d="M 342.5 172.5 L 400 172.5 L 425 130" />
+      <path class="trace thick" pathLength="100" d="M 342.5 212.5 L 550 212.5" />
+      <path class="trace medium" pathLength="100" d="M 342.5 272.5 L 450 272.5 L 500 300" />
+      <path class="trace thick" pathLength="100" d="M 342.5 312.5 L 400 312.5" />
+
+      <path class="trace medium" pathLength="100" d="M 172.5 342.5 L 172.5 400 L 140 425" />
+      <path class="trace thin" pathLength="100" d="M 212.5 342.5 L 212.5 460" />
+      <path class="trace thick" pathLength="100" d="M 272.5 342.5 L 272.5 410 L 310 440" />
+      <path class="trace medium" pathLength="100" d="M 312.5 342.5 L 312.5 395" />
+
+      <path class="trace thin" pathLength="100" d="M 142.5 172.5 L 90 172.5 L 65 135" />
+      <path class="trace medium" pathLength="100" d="M 142.5 212.5 L 0 212.5" />
+      <path class="trace thick" pathLength="100" d="M 142.5 272.5 L 20 272.5 L 10 300" />
+      <path class="trace thin" pathLength="100" d="M 142.5 312.5 L 65 312.5" />
+    </g>
+
+    <g class="nodes">
+      <!-- top -->
+      <g transform="translate(130, 50)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+      <g transform="translate(212.5, 10)"><g class="node thick"><circle cx="0" cy="0" r="7" /></g></g>
+      <g transform="translate(320, 45)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+      <g transform="translate(312.5, 90)"><g class="node medium"><circle cx="0" cy="0" r="5.5" /></g></g>
+
+      <!-- right -->
+      <g transform="translate(425, 130)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+      <g transform="translate(550, 212.5)"><g class="node thick"><circle cx="0" cy="0" r="7" /></g></g>
+      <g transform="translate(500, 300)"><g class="node medium"><circle cx="0" cy="0" r="5.5" /></g></g>
+      <g transform="translate(400, 312.5)"><g class="node thick"><circle cx="0" cy="0" r="7" /></g></g>
+
+      <!-- bottom -->
+      <g transform="translate(140, 425)"><g class="node medium"><circle cx="0" cy="0" r="5.5" /></g></g>
+      <g transform="translate(212.5, 460)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+      <g transform="translate(310, 440)"><g class="node thick"><circle cx="0" cy="0" r="7" /></g></g>
+      <g transform="translate(312.5, 395)"><g class="node medium"><circle cx="0" cy="0" r="5.5" /></g></g>
+
+      <!-- left -->
+      <g transform="translate(65, 135)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+      <g transform="translate(0, 212.5)"><g class="node medium"><circle cx="0" cy="0" r="5.5" /></g></g>
+      <g transform="translate(10, 300)"><g class="node thick"><circle cx="0" cy="0" r="7" /></g></g>
+      <g transform="translate(65, 312.5)"><g class="node thin"><circle cx="0" cy="0" r="4.5" /></g></g>
+    </g>
+  </svg>
+</div>
+
+<style lang="scss">
+  $animation-duration: 6.5s; 
+  $color-primary: #8E977D;
+  $color-flash: #ECE7D1;
+
+  .chip-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .circuit-svg {
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .chip-center {
+    fill: #3E3F29;
+    stroke: $color-primary;
+    stroke-width: 4;
+    filter: drop-shadow(0 0 8px rgba($color-primary, 0.5));
+    animation: chipPulse $animation-duration infinite ease-in-out;
+  }
+
+  .trace {
+    fill: none;
+    stroke: url(#trace-gradient);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    
+    // Using 100 instead of 800 because pathLength="100" normalizes the math
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100; 
+
+    animation: uniformExpandOutward $animation-duration infinite ease-in-out;
+
+    &.thin   { stroke-width: 2.5; }
+    &.medium { stroke-width: 4.5; }
+    &.thick  { stroke-width: 7.5; }
+  }
+
+  .node {
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 0 0; /* Locked to local grid translation center point */
+    stroke: $color-primary;
+    animation: uniformNodePop $animation-duration infinite ease-in-out;
+
+    circle {
+      fill: #8E977D;
+      stroke-width: 2.5;
+      stroke: inherit;
+    }
+  }
+
+  /**
+   * UNIFIED LINE CLOCK (0% to 45% is perfect uniform expansion)
+   */
+  @keyframes uniformExpandOutward {
+    0% { 
+      stroke-dashoffset: 100; 
+      filter: none; 
+      stroke: url(#trace-gradient); 
+      opacity: 1;
+    }
+    45% { 
+      stroke-dashoffset: 0; 
+      filter: none; 
+      stroke: url(#trace-gradient); 
+      opacity: 1;
+    }
+    /* Hold fully drawn through flash — don't interpolate dashoffset toward the wipe */
+    50% { stroke: $color-primary; filter: url(#glow); stroke-dashoffset: 0; opacity: 1; }
+    55% { stroke: $color-flash; filter: url(#glow); stroke-dashoffset: 0; opacity: 1; }
+    60% { stroke: $color-primary; filter: url(#glow); stroke-dashoffset: 0; opacity: 1; }
+    65% { stroke: $color-flash; filter: url(#glow); stroke-dashoffset: 0; opacity: 1; }
+    /* Wipe */
+    75%, 100% { 
+      opacity: 0; 
+      stroke-dashoffset: 100; 
+      filter: none; 
+    }
+  }
+
+  /**
+   * UNIFIED CIRCLE CLOCK
+   */
+  @keyframes uniformNodePop {
+    0%, 35% { 
+      opacity: 0; 
+      transform: scale(0); 
+      stroke: $color-primary;
+    }
+    45% { 
+      opacity: 1; 
+      transform: scale(1); 
+      filter: none;
+      stroke: $color-primary;
+    }
+    50% { stroke: $color-primary; filter: url(#glow); }
+    55% { stroke: $color-flash; filter: url(#glow); }
+    60% { stroke: $color-primary; filter: url(#glow); }
+    65% { stroke: $color-flash; filter: url(#glow); opacity: 1; }
+    72%, 100% { 
+      opacity: 0; 
+      transform: scale(0); 
+      filter: none;
+    }
+  }
+
+  @keyframes chipPulse {
+    0%, 100% { stroke: $color-primary; fill: #3E3F29; }
+    50%, 60% { stroke: $color-flash; fill: #3E3F29; filter: drop-shadow(0 0 12px rgba($color-flash, 0.5)); }
+  }
+</style>
