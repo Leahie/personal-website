@@ -1,0 +1,27 @@
+---
+import ButtonBar from "@/components/buttonbar.astro";
+import { Icon } from "astro-icon/components";
+---
+<ButtonBar>
+  <a class="icon" href="mailto:lz623@cornell.edu">
+    <Icon size={40} name="ion:mail" />
+  </a>
+  <a class="icon" href="https://www.linkedin.com/in/leah-zhang-2a6460255/">
+    <Icon size={40} name="ion:logo-linkedin" />
+  </a>
+  <a class="icon" href="https://github.com/Leahie">
+    <Icon size={40} name="ion:logo-github" />
+  </a>
+</ButtonBar>
+
+<style lang="scss" transition:persist>
+    [data-icon]{
+        color: var(--med);
+    }
+    .icon {
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+    
+</style>

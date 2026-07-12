@@ -1,11 +1,56 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/Page.astro';
+import {Image} from 'astro:assets';
+import homeCard from '@/assets/home_card.png'
+import Socials from '@/components/socials.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<div style="display: flex; justify-content: center; align-items: center; height: 100vh; ">
+		<div class="hero">
+			<Image src={homeCard}  alt="Main page" />
+			<div class="floating-badge">
+				<Socials />
+
+			</div>
+		</div>
+		
+	</div>
 </Layout>
+
+<style>
+	.hero {
+        width: 75%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 1rem;
+		overflow: hidden;
+		background-color: var(--white);
+		box-shadow: var(--photodrop);
+
+		position: relative;
+    }
+
+    .hero img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+	.floating-badge {
+        position: absolute;
+        
+        top: 44%;   /* 30% down from the top edge */
+        right: 15%;  /* 25% in from the left edge */
+        
+        transform: translate(-50%, -50%);
+        border-radius: 0.5rem;
+		padding: 0.2rem 0.5rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: var(--white);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+</style>
