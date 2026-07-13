@@ -34,7 +34,7 @@ import CircuitChip from '@/components/circuitchip.astro';
 	.hero-container {
 		width: 65%;
 		position: relative;
-		animation: openLayout 4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+		animation: openLayout 1.2s cubic-bezier(0.25, 1, 0.5, 1)  forwards;
 	}
 
 	.chip {
@@ -60,7 +60,7 @@ import CircuitChip from '@/components/circuitchip.astro';
 		background-color: var(--med); 
 		z-index: 1; /* Sits at the very bottom layer */
 
-		animation: popUnderlay 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+		animation: popUnderlay 1.3s cubic-bezier(0.25, 1, 0.5, 1) 1.2s forwards;
 	}
 
 	.hero {
@@ -70,14 +70,13 @@ import CircuitChip from '@/components/circuitchip.astro';
 		align-items: center;
 		border-radius: 1rem;
 		overflow: hidden;
-		background-color: var(--med);
+		background-color: var(--pale);
 		position: relative;
 		z-index: 2; /* Sits securely above the rotated underlay */
 		box-shadow: 
-			inset 0px 0px 32px rgb(219, 206, 165), 
 			0px 20px 40px rgba(32, 26, 27, 0.35);
 
-		animation: counterRotateHero 2s cubic-bezier(0.25, 1, 0.5, 1) 0.4s forwards;
+		animation: counterRotateHero 1s cubic-bezier(0.25, 1, 0.5, 1) 2.5s forwards;
 	}
     .hero img {
         width: 100%;
