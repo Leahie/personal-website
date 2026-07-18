@@ -4,6 +4,9 @@ import {Image} from 'astro:assets';
 import homeCard from '@/assets/home_card.png'
 import Socials from '@/components/socials.astro';
 import CircuitChip from '@/components/circuitchip.astro';
+import ButtonBar from '@/components/buttonbar.astro';
+import navLinks from '@/data/nav.json'
+import ButtonLink from '@/components/buttonlink.astro';
 ---
 
 <Layout>
@@ -15,17 +18,26 @@ import CircuitChip from '@/components/circuitchip.astro';
 
 			<div class="hero">
 				<Image src={homeCard}  alt="Main page" />
-				<div class="floating-badge">
-					<Socials />
-
+				<div class="floating-content">
+					<ButtonBar>
+						{
+							navLinks.map(({ name, link }) => (
+								<ButtonLink href={link}>
+									{name}
+								</ButtonLink>
+							))
+						}
+					</ButtonBar>
+					<div class="floating-badge">
+						<Socials />
+					</div>
+					
 				</div>
 			</div>
-			
 			<div class="chip">
-				<CircuitChip />
+				<CircuitChip show={false} />
 			</div>
 		</div>
-		
 
 	</div>
 </Layout>
@@ -85,11 +97,21 @@ import CircuitChip from '@/components/circuitchip.astro';
 
     }
 
-	.floating-badge {
-        position: absolute;
+	.floating-content{
+		position: absolute;
         
         top: 36%;   /* 30% down from the top edge */
         right: 18%;  /* 25% in from the left edge */
+
+		display: flex;
+		flex-direction: column;
+		align-items: end;
+		
+		gap: 10px;
+	}
+
+	.floating-badge {
+        
         
         border-radius: 0.5rem;
 		padding: 0.2rem 0.5rem;

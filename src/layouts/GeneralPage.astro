@@ -1,0 +1,32 @@
+---
+import "../styles/global.scss";
+import Head from "@/components/head.astro";
+import Navbar from "@/components/navbar.astro";
+
+interface Props {
+    title: string;
+    permalink: string;
+}
+
+const { title, permalink } = Astro.props;
+---
+<html lang="en">
+    <Head title={title} permalink={permalink} />
+    <body>
+        <Navbar />
+        <main>
+            <slot />
+        </main>
+    </body>
+</html>
+
+<style lang="scss">
+    main {
+        max-width: 900px;
+        width: 100%;
+        padding: 170px 0;
+        display: flex;
+        flex-direction: column;
+        
+    }
+</style>

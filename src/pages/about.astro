@@ -1,0 +1,110 @@
+---
+import PageLayout from '@/layouts/GeneralPage.astro';
+import Leah from '@/assets/photo.png';
+import Icon from '@/assets/Icon.png';
+import {Image} from 'astro:assets';
+---
+
+<PageLayout title="About" permalink="/about">
+        <h1>the artist</h1>
+        <div>
+            <div class="about-content">
+                <div>
+                    <div class="about-images">
+                    <div class="leah-photo">
+                        <Image src={Leah} alt="Leah" width={300} densities={[1.5, 2, 3]} />
+                    </div>
+                    <div class="bg-icon">
+                        <Image src={Icon} alt="icon" width={300} densities={[1.5, 2, 3]} />
+                    </div>
+                    <div class="leah-shadow">
+                        <Image src={Leah} alt="" width={300} densities={[1.5, 2, 3]} aria-hidden="true" />
+                    </div>
+                    
+                </div>
+                
+                </div>
+               
+                <div class="about-text">
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero et dolores itaque culpa corrupti asperiores exercitationem, quasi porro eos accusantium, atque praesentium provident ratione suscipit quia facere, eveniet obcaecati assumenda.lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero et dolores itaque culpa corrupti asperiores exercitationem, quasi porro eos accusantium, atque praesentium provident ratione suscipit quia facere, eveniet obcaecati assumenda.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero et dolores itaque culpa corrupti asperiores exercitationem, quasi porro eos accusantium, atque praesentium provident ratione suscipit quia facere, eveniet obcaecati assumenda.lorem ipsum dolor, sit amet consectetur adipisicing elit. Libero et dolores itaque culpa corrupti asperiores exercitationem, quasi porro eos accusantium, atque praesentium provident ratione suscipit quia facere, eveniet obcaecati assumenda.
+                    </p>
+                    </div>
+                
+            </div>
+        </div>
+</PageLayout>
+
+<style lang="scss">
+    .about-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 600px;
+        }
+    }
+
+    .about-images {
+        display: grid;
+        grid-template-areas: "overlay";
+        width: fit-content;
+
+        > div {
+            grid-area: overlay;
+        }
+    }
+        .leah-photo{
+            z-index: 3;
+            
+        }
+
+        .leah-shadow {
+            z-index: 1;
+            width: 300px;        
+            overflow: hidden;    /* Trims off the original image hiding on the left */
+            box-shadow: var(--cut);
+            border-radius: 50%;
+            img {
+                transform: translateX(-300px);
+                filter: drop-shadow(300px 0px 2px var(--light));
+            }
+
+            animation: slideOut 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.2s; /* Tiny delay so the user catches the movement */
+        }
+
+        
+
+        .bg-icon {
+            z-index: 2;
+            justify-self: start;
+            align-self: start;
+
+            translate: 45px -80px;
+
+            scale: -.7 .7; 
+        }
+
+        @keyframes slideOut {
+        from {
+            translate: 0px 0px;
+        }
+        to {
+            /* This is where the shadow pops out to rest */
+            translate: -15px 15px; 
+        }
+    }
+
+    .about-text {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+</style>
