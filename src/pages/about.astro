@@ -3,26 +3,37 @@ import PageLayout from '@/layouts/GeneralPage.astro';
 import Leah from '@/assets/photo.png';
 import Icon from '@/assets/Icon.png';
 import {Image} from 'astro:assets';
+import ButtonLink from '@/components/buttonlink.astro';
+import Socials from '@/components/socials.astro';
 ---
 
 <PageLayout title="About" permalink="/about">
         <h1>the artist</h1>
         <div>
             <div class="about-content">
-                <div>
+                <div class="about-media">
                     <div class="about-images">
-                    <div class="leah-photo">
-                        <Image src={Leah} alt="Leah" width={300} densities={[1.5, 2, 3]} />
+                        <div class="leah-stack">
+                            <div class="leah-photo">
+                                <Image src={Leah} alt="Leah" width={300} densities={[1.5, 2, 3]} />
+                            </div>
+                            <div class="leah-shadow">
+                                <Image src={Leah} alt="" width={300} densities={[1.5, 2, 3]} aria-hidden="true" />
+                            </div>
+                        </div>
+                        <div class="bg-icon">
+                            <Image src={Icon} alt="icon" width={300} densities={[1.5, 2, 3]} />
+                        </div>
                     </div>
-                    <div class="bg-icon">
-                        <Image src={Icon} alt="icon" width={300} densities={[1.5, 2, 3]} />
-                    </div>
-                    <div class="leah-shadow">
-                        <Image src={Leah} alt="" width={300} densities={[1.5, 2, 3]} aria-hidden="true" />
-                    </div>
+
                     
-                </div>
-                
+
+                    <div class="about-bar">
+                        <Socials />
+                        <ButtonLink variant="dark" href="/resume">Resume</ButtonLink>
+                    </div>
+
+
                 </div>
                
                 <div class="about-text">
@@ -51,57 +62,81 @@ import {Image} from 'astro:assets';
         }
     }
 
+    .about-media {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
     .about-images {
         display: grid;
         grid-template-areas: "overlay";
-        width: fit-content;
 
-        > div {
+        > * {
             grid-area: overlay;
         }
     }
-        .leah-photo{
-            z-index: 3;
-            
-        }
 
-        .leah-shadow {
-            z-index: 1;
-            width: 300px;        
-            overflow: hidden;    /* Trims off the original image hiding on the left */
-            box-shadow: var(--cut);
-            border-radius: 50%;
-            img {
-                transform: translateX(-300px);
-                filter: drop-shadow(300px 0px 2px var(--light));
-            }
+    .leah-stack {
+        display: grid;
+        grid-template-areas: "overlay";
+        /* Room for the -15px / 15px shadow pop-out without spilling onto the bar */
+        width: 300;
+        overflow: hidden;
 
-            animation: slideOut 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.2s; /* Tiny delay so the user catches the movement */
-        }
-
-        
-
-        .bg-icon {
-            z-index: 2;
-            justify-self: start;
+        > * {
+            grid-area: overlay;
+            width: 300px;
+            height:400px;
+            justify-self: end;
             align-self: start;
+        }
+    }
 
-            translate: 45px -80px;
+    .leah-photo {
+        z-index: 3;
+    }
 
-            scale: -.7 .7; 
+    .leah-shadow {
+        z-index: 1;
+        overflow: hidden;
+        box-shadow: var(--cut);
+        border-radius: 50%;
+
+        :global(img) {
+            transform: translateX(-300px);
+            filter: drop-shadow(300px 0px 2px var(--light));
         }
 
-        @keyframes slideOut {
+        animation: slideOut 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        animation-delay: 0.2s;
+    }
+
+    .bg-icon {
+        z-index: 2;
+        justify-self: start;
+        align-self: start;
+        translate: 45px -80px;
+        scale: -.7 .7;
+    }
+
+    @keyframes slideOut {
         from {
             translate: 0px 0px;
         }
         to {
-            /* This is where the shadow pops out to rest */
-            translate: -15px 15px; 
+            translate: -15px 15px;
         }
     }
 
+    .about-bar {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
     .about-text {
         display: flex;
         flex-direction: column;

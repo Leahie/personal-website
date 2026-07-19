@@ -1,30 +1,44 @@
 ---
 export interface Props {
     href: string;
+    variant?: 'light' | 'dark';
 }
 
-const { href } = Astro.props;
+const { href, variant = 'light' } = Astro.props;
 
 ---
 
-<a {href} class="button-link">
+<a {href} class:list={['button-link', variant]}>
     <slot />
 </a>
 
 <style lang="scss">
     .button-link{
         text-decoration: none;
-        color: var(--med);
-        font-size: 1.2rem;
+        font-size: 17px;
         font-weight: 500;
         padding: 8px 16px;
-        border-radius: 4px;
-        background-color: var(--pale);
-        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+        border-radius: 10px;
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        height: fit-content;
 
-        &:hover{
-            background-color: var(--light);
-            color: var(--white);
+        &.light {
+            color: var(--med);
+            background-color: var(--pale);
+
+            &:hover {
+                background-color: var(--light);
+                color: var(--white);
+            }
+        }
+
+        &.dark {
+            color: var(--pale);
+            background-color: var(--med);
+
+            &:hover {
+                box-shadow: var(--shadow);
+            }
         }
     }
 </style>
