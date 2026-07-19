@@ -1,0 +1,115 @@
+---
+import Head from '@/components/head.astro';
+import Navbar from '@/components/navbar.astro';
+import '../styles/global.scss';
+
+interface Props {
+  title: string;
+  startDate: string;
+  endDate: string;
+  techStack: string[];
+  permalink: string;
+  link?: string;
+}
+
+const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
+---
+
+<html lang="en">
+  <Head title={title} permalink={permalink} />
+  <body>
+    <Navbar />
+    <main>
+      <header class="project-header">
+        <h1>{title} {link && (
+          <a href={link} target="_blank" rel="noopener noreferrer">
+            Link ↗
+          </a>
+        )}
+        </h1> 
+        
+                <p class="project-dates">{startDate} – {endDate} </p>
+        
+        <ul class="project-tech">
+          {techStack.map((tech) => (
+            <li class="project-tech-item">{tech}</li>
+          ))}
+        </ul>
+        
+      </header>
+      <article class="project-body">
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>
+
+<style lang="scss">
+  main {
+    max-width: 900px;
+    width: 100%;
+    padding: 170px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  h1{
+    margin-bottom: 0rem;
+  }
+
+  .project-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 5px;
+
+  }
+
+  .project-dates {
+    color: var(--black);
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--med);
+    font-weight: 500;
+  }
+  
+  .project-tech-item {
+    background-color: var(--light);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .project-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    line-height: 1.6;
+  }
+   a {
+        display: inline-block;
+        position: relative;
+        transition: 0.2s;
+        font-size:12px;
+        color: var(--med);
+        text-decoration: none;
+        box-shadow: none;
+        padding: 0;
+        font-weight: inherit;
+    }
+
+    a:hover {
+        background: none;
+    }
+
+</style>

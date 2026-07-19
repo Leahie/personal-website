@@ -1,0 +1,23 @@
+[
+  {
+    "number": "01",
+    "title": "BoardBash",
+    "description": "Nested visual workspace and every creative's first project. Built with React, ExpressJS, and FirebaseDB. Basically notion + figma. ",
+    "url": "https://www.boardbash.co/",
+    "slug": "boardbash",
+    "color": "#90A694",
+    "x": "68%",
+    "y": "12%"
+  },
+  {
+    "number": "02",
+    "title": "skellysearch",
+    "description": "Sketch to pose art reference finder built with React and FastAPI, hosted on AWS, motivated by lack of anatomically accurate pose searchers",
+    "url": "http://skellysearch.com/",
+    "slug": "skellysearch",
+    "color": "#CAE0CA",
+    "x": "15%",
+    "y": "35%"
+    
+  }
+]

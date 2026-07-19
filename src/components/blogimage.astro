@@ -1,0 +1,54 @@
+---
+import { Picture } from "astro:assets";
+
+export interface Props {
+  src: any;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<figure class="blogimage">
+  <div class="blogimage-frame">
+    <Picture
+      class="image"
+      src={src}
+      widths={[400, 800]}
+      sizes="(max-width: 300px) 280px, (max-width: 500px) 20em, (max-width: 600px) 27em, (max-width: 700px) 33em, (min-width: 700px) 40em"
+      alt={alt}
+      loading="lazy"
+    />
+  </div>
+  <figcaption>{alt}</figcaption>
+</figure>
+
+<style lang="scss">
+  .blogimage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 16px;
+  }
+
+  .blogimage-frame {
+    width: 100%;
+    max-width: 40em;
+    line-height: 0;
+    box-shadow: var(--photodrop);
+  }
+
+  .blogimage :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  figcaption {
+    font-style: oblique;
+    line-height: 1.4;
+  }
+</style>

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'astro/config';
 
 import icon from 'astro-icon';
+import mdx from '@astrojs/mdx';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -17,5 +18,5 @@ export default defineConfig({
       },
 	},
 
-  integrations: [icon()],
+  integrations: [icon(), mdx()],
 });
