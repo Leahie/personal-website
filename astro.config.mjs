@@ -6,6 +6,8 @@ import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
 import mdx from '@astrojs/mdx';
 
+import react from '@astrojs/react';
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
@@ -16,7 +18,7 @@ export default defineConfig({
               '@': path.resolve(__dirname, 'src'),
           },
       },
-	},
+    },
 
-  integrations: [icon(), mdx()],
+  integrations: [icon(), mdx(), react()],
 });

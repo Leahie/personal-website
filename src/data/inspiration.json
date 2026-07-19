@@ -1,0 +1,15 @@
+{
+    "art": [
+        { "title": "Surrealism Gallery", "url": "https://example.com/art1", "desc": "Deep dive into dreamscapes." },
+        { "title": "MoMA Collection", "url": "https://example.com/art2", "desc": "Modern masterpieces." },
+        { "title": "Renaissance Studies", "url": "https://example.com/art3", "desc": "The geometry of classical art." }
+    ],
+    "nature": [
+        { "title": "Forest Mycelium", "url": "https://example.com/nature1", "desc": "How trees talk to each other." },
+        { "title": "Deep Ocean Bioluminescence", "url": "https://example.com/nature2", "desc": "Light in the absolute dark." }
+    ],
+    "history": [
+        { "title": "Ancient Architecture", "url": "https://example.com/hist1", "desc": "The engineering of empires." },
+        { "title": "Lost Languages", "url": "https://example.com/hist2", "desc": "Deciphering the forgotten past." }
+    ]
+}
