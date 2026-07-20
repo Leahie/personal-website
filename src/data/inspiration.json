@@ -32,8 +32,13 @@
   "art": [
     {
       "title": "Creation",
-      "subtitle": "They say the greeks painted their sculptures.",
+      "subtitle": "They say the Romans painted their sculptures.",
       "image": "Portfolio/Older-Works/Creation.png"
+    },
+    {
+      "title": "Colored Pencil",
+      "subtitle": "People like this piece a lot on Pinterest. I don't even know what fruit this is supposed to be.",
+      "image": "Portfolio/RecentWorks/fruit.jpg"
     },
     {
       "title": "Escape",
