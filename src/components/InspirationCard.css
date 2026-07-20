@@ -7,7 +7,6 @@
   border-radius: 1px;
   box-shadow: var(--photodrop);
   text-decoration: none;
-  color: var(--pale);
   background: var(--med);
 }
 
@@ -53,7 +52,6 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: 1rem 1.1rem 1.15rem;
-  color: var(--pale);
   pointer-events: none;
 }
 
@@ -78,7 +76,7 @@
 .card-meta .card-subtitle {
   font-size: 0.85rem;
   line-height: 1.35;
-  opacity: 0.85;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  color: var(--white)
 }

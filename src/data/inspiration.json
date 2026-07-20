@@ -31,6 +31,16 @@
   ],
   "art": [
     {
+      "title": "Creation",
+      "subtitle": "They say the greeks painted their sculptures.",
+      "image": "Portfolio/Older-Works/Creation.png"
+    },
+    {
+      "title": "Escape",
+      "subtitle": "",
+      "image": "Portfolio/RecentWorks/Reach-for-Hope.jpg"
+    },
+    {
       "title": "Observation One",
       "subtitle": "The other students at my old art studio.",
       "image": "Portfolio/Older-Works/Obser1.jpg"
@@ -50,11 +60,7 @@
       "subtitle": "Self-reflection is difficult; self-awareness is a journey. In this piece, the figure gazing into the mirror is surprised by what she finds—is she really this angry? ",
       "image": "Portfolio/RecentWorks/The-Person-In-The-Mirror.jpg"
     },
-    {
-      "title": "Creation",
-      "subtitle": "They say the greeks painted their sculptures.",
-      "image": "Portfolio/Older-Works/Creation.png"
-    },
+    
     {
       "title": "Water",
       "subtitle": "",
@@ -65,11 +71,7 @@
       "subtitle": "Poster art for AI&Us exhibition.",
       "image": "Portfolio/Older-Works/Illustration2.png"
     },
-    {
-      "title": "Escape",
-      "subtitle": "",
-      "image": "Portfolio/RecentWorks/Reach-for-Hope.jpg"
-    },
+  
     {
       "title": "Skin, Muscles, and Bones",
       "subtitle": "Underneath my face’s skin and muscles is just my skull. I wonder if my parents would be able to recognize me from a row of skulls.",
@@ -91,6 +93,11 @@
       "image": "Portfolio/RecentWorks/Times-Grasps.jpg"
     },
     {
+      "title": "The Blacksmith",
+      "subtitle": "",
+      "image": "Portfolio/AI&Us/The-Blacksmith.jpg"
+    },
+    {
       "title": "She died as she lived. Independent",
       "subtitle": "The title is a quip on the fact that all her body parts are independent to each other.",
       "image": "Portfolio/RecentWorks/11.jpg"
@@ -99,6 +106,13 @@
       "title": "A Computer's Core",
       "subtitle": "Also the cover for Teknos 2024.",
       "image": "Portfolio/AI&Us/A-Computer-Core.jpg"
+    },
+
+    
+    {
+      "title": "Ticking Egg Bomb",
+      "subtitle": "",
+      "image": "Portfolio/AI&Us/Ticking-Egg-Bomb.png"
     },
     {
       "title": "A Fully Connected Neural Network",
@@ -109,16 +123,6 @@
       "title": "Flower -no- Girl",
       "subtitle": "Also the cover for Threshold 2024.",
       "image": "Portfolio/AI&Us/Flower-No-Girl.jpg"
-    },
-    {
-      "title": "The Blacksmith",
-      "subtitle": "",
-      "image": "Portfolio/AI&Us/The-Blacksmith.jpg"
-    },
-    {
-      "title": "Ticking Egg Bomb",
-      "subtitle": "",
-      "image": "Portfolio/AI&Us/Ticking-Egg-Bomb.png"
     }
   ],
   "misc": [
