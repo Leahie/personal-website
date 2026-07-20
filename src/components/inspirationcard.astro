@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import fallbackCard from '@/assets/home_card.png';
+import './InspirationCard.css';
+
+interface Props {
+  item: {
+    title: string;
+    image?: string;
+    date?: string;
+    year?: string;
+    subtitle?: string;
+    desc?: string;
+    url?: string;
+  };
+}
+
+const { item } = Astro.props;
+
+// Explicit globs — keep Portfolio + Research (avoid matching junk / broken public links)
+const assetModules = {
+  ...import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/Portfolio/**/*.{jpg,jpeg,png,JPG,JPEG,PNG,webp,WEBP}',
+    { eager: true }
+  ),
+  ...import.meta.glob<{ default: ImageMetadata }>(
+    '../assets/Research/**/*.{jpg,jpeg,png,JPG,JPEG,PNG,webp,WEBP}',
+    { eager: true }
+  ),
+};
+
+/** Map "Portfolio/Older-Works/Obser1.jpg" → ImageMetadata */
+const assetsByPath: Record<string, ImageMetadata> = {};
+for (const [key, mod] of Object.entries(assetModules)) {
+  const k = key.replace(/\\/g, '/');
+  const marker = '/assets/';
+  const idx = k.lastIndexOf(marker);
+  if (idx === -1) continue;
+  const rel = k.slice(idx + marker.length); // e.g. Portfolio/Older-Works/Obser1.jpg
+  const meta = (mod as { default: ImageMetadata }).default ?? (mod as ImageMetadata);
+  assetsByPath[rel] = meta;
+}
+
+function resolveImage(imagePath?: string): ImageMetadata {
+  if (!imagePath) return fallbackCard;
+
+  const normalized = imagePath
+    .replace(/\\/g, '/')
+    .replace(/^\/+/, '')
+    .replace(/^src\//, '')
+    .replace(/^assets\//, '');
+
+  return assetsByPath[normalized] ?? fallbackCard;
+}
+
+const imgSrc = resolveImage(item.image);
+const date = item.date || item.year || '';
+const subtitle = item.subtitle || item.desc || '';
+const hasUrl = Boolean(item.url);
+---
+
+{
+  hasUrl ? (
+    <a
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inspiration-card inspiration-card--link"
+    >
+      <Image
+        src={imgSrc}
+        alt={item.title || ''}
+        class="inspiration-card-img"
+        width={800}
+        height={800}
+        sizes="(max-width: 600px) 100vw, 450px"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="inspiration-card-shade" aria-hidden="true" />
+      <div class="card-meta">
+        <h3>{item.title}</h3>
+        {date && <p class="card-date">{date}</p>}
+        {subtitle && <p class="card-subtitle">{subtitle}</p>}
+      </div>
+    </a>
+  ) : (
+    <div class="inspiration-card">
+      <Image
+        src={imgSrc}
+        alt={item.title || ''}
+        class="inspiration-card-img"
+        width={800}
+        height={800}
+        sizes="(max-width: 600px) 100vw, 450px"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="inspiration-card-shade" aria-hidden="true" />
+      <div class="card-meta">
+        <h3>{item.title}</h3>
+        {date && <p class="card-date">{date}</p>}
+        {subtitle && <p class="card-subtitle">{subtitle}</p>}
+      </div>
+    </div>
+  )
+}

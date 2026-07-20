@@ -1,15 +1,134 @@
 {
-    "art": [
-        { "title": "Surrealism Gallery", "url": "https://example.com/art1", "desc": "Deep dive into dreamscapes." },
-        { "title": "MoMA Collection", "url": "https://example.com/art2", "desc": "Modern masterpieces." },
-        { "title": "Renaissance Studies", "url": "https://example.com/art3", "desc": "The geometry of classical art." }
-    ],
-    "nature": [
-        { "title": "Forest Mycelium", "url": "https://example.com/nature1", "desc": "How trees talk to each other." },
-        { "title": "Deep Ocean Bioluminescence", "url": "https://example.com/nature2", "desc": "Light in the absolute dark." }
-    ],
-    "history": [
-        { "title": "Ancient Architecture", "url": "https://example.com/hist1", "desc": "The engineering of empires." },
-        { "title": "Lost Languages", "url": "https://example.com/hist2", "desc": "Deciphering the forgotten past." }
-    ]
+    "research": [
+    {
+      "title": "Pacific Symposium on Biocomputing 2025",
+      "date": "2025",
+      "subtitle": "Built BERTopic/LDA models off of webscrapped papers for their 30th anniversary. Got to go on a fun trip to Hawaii for the conference.",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39670358/",
+      "image": "Research/psb.png"
+    },
+    {
+      "title": "Placenta Villi Clustering",
+      "date": "2024",
+      "subtitle": "Used CV to cluster placenta villi to unify pathologist disagreement. Work eventually published in journal \"Placenta\".",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/40313259/",
+      "image": "Research/placenta.png"
+    },
+    {
+      "title": "AEOP PTSD Research",
+      "date": "2024-2025",
+      "subtitle": "I used deep learning to help create a non-biased PTSD detection model for the WRAIR. I really enjoyed my time there!",
+      "url": "https://wrair.health.mil/",
+      "image": "Research/aeop.png"
+    },
+    {
+      "title": "Art With Parkinson's",
+      "date": "2024-2025",
+      "subtitle": "My senior research project. This is inspired by my time teaching art at my grandma's retirement home. I used deep learning to create a corrective algorithm.",
+      "url": "https://drive.google.com/file/d/14foV9oLBTsVq-wdQ9f0yQbXRKXQXUeUW/view?usp=sharing",
+      "image": "Research/awp.png"
+    }
+  ],
+  "art": [
+    {
+      "title": "Observation One",
+      "subtitle": "The other students at my old art studio.",
+      "image": "Portfolio/Older-Works/Obser1.jpg"
+    },
+    {
+      "title": "Observation Two",
+      "subtitle": "A storage closet in my old art studio.",
+      "image": "Portfolio/Older-Works/Obser2.jpg"
+    },
+    {
+      "title": "The Bus Stop",
+      "subtitle": "Grandma or young boy? I can't remember anymore.",
+      "image": "Portfolio/Older-Works/Time-Stop.jpg"
+    },
+    {
+      "title": "The Person In The Mirror",
+      "subtitle": "Self-reflection is difficult; self-awareness is a journey. In this piece, the figure gazing into the mirror is surprised by what she finds—is she really this angry? ",
+      "image": "Portfolio/RecentWorks/The-Person-In-The-Mirror.jpg"
+    },
+    {
+      "title": "Creation",
+      "subtitle": "They say the greeks painted their sculptures.",
+      "image": "Portfolio/Older-Works/Creation.png"
+    },
+    {
+      "title": "Water",
+      "subtitle": "",
+      "image": "Portfolio/Older-Works/Water.png"
+    },
+    {
+      "title": "Art Gallery",
+      "subtitle": "Poster art for AI&Us exhibition.",
+      "image": "Portfolio/Older-Works/Illustration2.png"
+    },
+    {
+      "title": "Escape",
+      "subtitle": "",
+      "image": "Portfolio/RecentWorks/Reach-for-Hope.jpg"
+    },
+    {
+      "title": "Skin, Muscles, and Bones",
+      "subtitle": "Underneath my face’s skin and muscles is just my skull. I wonder if my parents would be able to recognize me from a row of skulls.",
+      "image": "Portfolio/RecentWorks/10.jpg"
+    },
+    {
+      "title": "Smashing the Spinal Cord",
+      "subtitle": "",
+      "image": "Portfolio/RecentWorks/STSC.jpg"
+    },
+    {
+      "title": "Observation Three",
+      "subtitle": "My art classroom.",
+      "image": "Portfolio/RecentWorks/Observ.jpg"
+    },
+    {
+      "title": "Time's Grasp",
+      "subtitle": "In Latin, we learned about the Fates, three older women who determined human destinies. I find myself thinking of these Fates anytime when I begin to feel the pressure of time.",
+      "image": "Portfolio/RecentWorks/Times-Grasps.jpg"
+    },
+    {
+      "title": "She died as she lived. Independent",
+      "subtitle": "The title is a quip on the fact that all her body parts are independent to each other.",
+      "image": "Portfolio/RecentWorks/11.jpg"
+    },
+    {
+      "title": "A Computer's Core",
+      "subtitle": "Also the cover for Teknos 2024.",
+      "image": "Portfolio/AI&Us/A-Computer-Core.jpg"
+    },
+    {
+      "title": "A Fully Connected Neural Network",
+      "subtitle": "In this self-portrait, I’m gazing up at this new, seemingly limitless version of machine learning in wonder and a twinge of fear: where will machine learning take us next?",
+      "image": "Portfolio/AI&Us/A-Fully-Connected Neural-Network.jpg"
+    },
+    {
+      "title": "Flower -no- Girl",
+      "subtitle": "Also the cover for Threshold 2024.",
+      "image": "Portfolio/AI&Us/Flower-No-Girl.jpg"
+    },
+    {
+      "title": "The Blacksmith",
+      "subtitle": "",
+      "image": "Portfolio/AI&Us/The-Blacksmith.jpg"
+    },
+    {
+      "title": "Ticking Egg Bomb",
+      "subtitle": "",
+      "image": "Portfolio/AI&Us/Ticking-Egg-Bomb.png"
+    }
+  ],
+  "misc": [
+    {
+      "title": "ATconnect",
+      "date": "2025-4-26",
+      "subtitle": "I initiated the first ATconnect event in 2025 connecting students and companies across the county to create and share their assistive technology with students with disabilities. I am proud that the club continued this event in 2026 and managed to reach over 140 people!",
+      "url": "https://tjatc.org/atconnect",
+      "image": "Research/atconnect.png"
+    }
+  ]
+  
 }

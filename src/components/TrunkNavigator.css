@@ -6,168 +6,144 @@
 }
 
 /*
-  Wrapper matches CV.png (1980×1300).
-  clip-path ellipse is the shared “radius line” with the outermost ring:
-  ellipse centered on the top edge, full width, hanging down.
+  Hanging semicircle (ellipse clipped from the top).
+  Top stays fixed; height shrinks/grows so the bottom rises/falls.
 */
 .trunk-wrapper {
-  --trunk-ratio: 1980 / 1300;
+  --semi-ratio: 2 / 1;
+  --collapsed-height: 2.5rem; /* roughly topic-label height + padding */
+  --expanded-height: calc(100cqi * 0.16); /* flat eclipse, not a tall semicircle */
+
   position: relative;
-
-  aspect-ratio: var(--trunk-ratio);
-  overflow: hidden;
-  margin-bottom: 40px;
-  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  max-height: 1000px;
-  clip-path: ellipse(50% 100% at 50% 0%);
-}
-
-.upside-down-trunk {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: center center;
-  transform: rotate(180deg);
-  opacity: 0.8;
-  display: block;
+  max-width: 900px;
+  height: var(--collapsed-height);
+  overflow: hidden;
+  margin: 0 0 2rem;
+  container-type: inline-size;
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  background: var(--black);
+  transition:
+    height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.4s ease;
 }
 
+.trunk-wrapper:hover {
+  height: var(--expanded-height);
+  background: linear-gradient(
+    180deg,
+    var(--black) 0%,
+    var(--med) 55%,
+    var(--light) 140%
+  );
+}
+
+/* Full dome geometry, pinned to top — never translates */
+.trunk-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--expanded-height);
+  min-height: 100%;
+}
+
+/* Topic label on the black collapsed dome — fills the thin strip */
+.collapsed-topic {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.trunk-wrapper:hover .collapsed-topic {
+  opacity: 0;
+}
+
+/* Concentric rings — only while expanded */
 .rings-overlay {
   position: absolute;
   inset: 0;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease 0.06s;
 }
 
-/*
-  Ellipses (not circles): width% and height% of the trunk box
-  keep the same aspect ratio as the PNG. Centered on the top edge
-  so only the hanging half shows — same curve family as clip-path.
-*/
+.trunk-wrapper:hover .rings-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .tree-ring {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  background: rgba(20, 20, 20, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: transparent;
+  border: 2px solid var(--light);
   cursor: pointer;
   transition:
-    transform 0.4s ease,
-    opacity 0.4s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background-color 0.3s ease;
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   box-sizing: border-box;
-  pointer-events: auto;
   padding: 0;
   margin: 0;
 }
 
+.ring-core {
+  background: rgba(32, 26, 27, 0.35);
+}
+
 .ring-label {
   position: absolute;
-  bottom: 8px;
+  bottom: 4%;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.65);
+  color: var(--white);
   font-weight: 600;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition: color 0.25s ease;
   white-space: nowrap;
   pointer-events: none;
 }
 
 .ring-core .ring-label {
-  bottom: 6px;
+  bottom: 8%;
   font-size: 0.65rem;
 }
 
 .tree-ring:hover,
 .tree-ring.active {
-  border-color: #00ffcc;
-  box-shadow:
-    inset 0 0 15px rgba(0, 255, 204, 0.3),
-    0 0 20px rgba(0, 255, 204, 0.4);
-  background: rgba(0, 255, 204, 0.05);
+  border-color: var(--pale);
+  background: rgba(142, 151, 125, 0.12);
+  box-shadow: inset 0 0 18px rgba(142, 151, 125, 0.2);
 }
 
 .tree-ring:hover .ring-label,
 .tree-ring.active .ring-label {
-  color: #00ffcc;
-  text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
-}
-
-/* Minimize: clip from the bottom; rings stay on the same top origin */
-.trunk-wrapper.is-minimized {
-  max-height: 180px;
-}
-
-.trunk-wrapper.is-minimized .tree-ring:not(.active) {
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -50%) scale(0.6);
-}
-
-.trunk-wrapper.is-minimized .tree-ring.active {
-  top: 0;
-  transform: translate(-50%, -50%);
-}
-
-.trunk-wrapper.is-minimized:hover {
-  max-height: 1000px;
-}
-
-.trunk-wrapper.is-minimized:hover .tree-ring {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  top: 0;
-  transform: translate(-50%, -50%) scale(1) !important;
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  width: 100%;
-  max-width: 900px;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
-
-.inspiration-card {
-  background: #181818;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  padding: 24px;
-  text-decoration: none;
-  color: white;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.inspiration-card:hover {
-  transform: translateY(-4px);
-  border-color: #00ffcc;
-}
-
-.card-meta h3 {
-  margin: 0 0 10px 0;
-  font-size: 1.2rem;
-}
-
-.card-meta p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #aaa;
-  line-height: 1.4;
+  color: var(--white);
 }
 
 @media (max-width: 600px) {
-  .cards-grid {
-    grid-template-columns: 1fr;
+  .trunk-wrapper {
+    --collapsed-height: 2.25rem;
+    --expanded-height: calc(100cqi * 0.2);
   }
 }

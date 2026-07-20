@@ -1,34 +1,124 @@
 ---
 import PageLayout from '@/layouts/GeneralPage.astro';
-import TreeTrunk from '@/assets/CV.png'; // 
-
-// Import the React Navigator component
 import TrunkNavigator from '@/components/TrunkNavigator.tsx';
+import InspirationCard from '@/components/inspirationcard.astro';
 import inspirationData from '@/data/inspiration.json';
+
+const tabs = Object.keys(inspirationData);
+
+/** Round-robin: one from each tab per pass until all queues are empty. */
+function interleaveTabs(
+  data: typeof inspirationData,
+  tabKeys: string[]
+) {
+  const queues = tabKeys.map((tab) =>
+    data[tab].map((item) => ({ tab, item }))
+  );
+  const ordered: { tab: string; item: (typeof inspirationData)[string][number] }[] = [];
+
+  let anyLeft = true;
+  while (anyLeft) {
+    anyLeft = false;
+    for (const queue of queues) {
+      const next = queue.shift();
+      if (next) {
+        ordered.push(next);
+        anyLeft = true;
+      }
+    }
+  }
+
+  return ordered;
+}
+
+const interleaved = interleaveTabs(inspirationData, tabs);
 ---
 
 <PageLayout title="Blog" permalink="/blog">
     <h1>the muse</h1>
-    
-    <div class="blog-stage">
 
-        <TrunkNavigator 
-          client:load 
-          data={inspirationData} 
-          treeImgSrc={TreeTrunk.src} 
-        />
+    <div class="blog-stage">
+        <TrunkNavigator client:visible data={inspirationData} />
+
+        <div class="cards-grid" id="inspiration-cards" data-tabs={tabs.join(',')}>
+            {
+                interleaved.map(({ tab, item }) => (
+                    <div class="card-slot" data-tab={tab}>
+                        <InspirationCard item={item} />
+                    </div>
+                ))
+            }
+        </div>
     </div>
 </PageLayout>
 
+<script>
+    function getValidTabs(): string[] {
+        const raw = document.getElementById('inspiration-cards')?.dataset.tabs ?? '';
+        return raw ? raw.split(',').filter(Boolean) : [];
+    }
+
+    function normalizeTab(tab: string | null): string | null {
+        if (!tab) return null;
+        const valid = getValidTabs();
+        return valid.includes(tab) ? tab : null;
+    }
+
+    function applyTab(tab: string | null) {
+        const active = normalizeTab(tab);
+        const slots = document.querySelectorAll<HTMLElement>('#inspiration-cards .card-slot');
+        slots.forEach((slot) => {
+            const show = !active || slot.dataset.tab === active;
+            slot.hidden = !show;
+        });
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    applyTab(params.get('tab'));
+
+    window.addEventListener('inspiration-tab', ((event: CustomEvent<{ tab: string | null }>) => {
+        applyTab(event.detail?.tab ?? null);
+    }) as EventListener);
+
+    window.addEventListener('popstate', () => {
+        applyTab(new URLSearchParams(window.location.search).get('tab'));
+    });
+</script>
+
 <style lang="scss">
-    /* Keeps the overall page content structured cleanly */
+    h1 {
+        margin-bottom: 0;
+    }
+
     .blog-stage {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 20px;
     }
-    
- 
+
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        width: 100%;
+        max-width: 900px;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .card-slot {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .card-slot[hidden] {
+        display: none;
+    }
+
+    @media (max-width: 600px) {
+        .cards-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
