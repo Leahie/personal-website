@@ -10,6 +10,9 @@ link: "https://www.boardbash.co/"
 ---
 import BlogImage from "@/components/blogimage.astro";
 import PureRef from "@/assets/documents/boardbash/pureref.png";
+import BaseDesign from "@/assets/documents/boardbash/basedesign.png";
+import WebDesign from "@/assets/documents/boardbash/webdesign.png";
+import MobileDesign from "@/assets/documents/boardbash/mobiledesign.png";
 
 This was the first big project I ever tried to make. It was initially for a class hosted by DTI (a Cornell project team) called Trends in Web Development, but later I decided to finish it off on my own. Here's the journey I went through to create and market this project!
 
@@ -37,7 +40,28 @@ I was excited about figuring out the database structure for the nested boards. H
 These lingering questions told me I had found a project interesting enough for me to create.
 
 ## Design 
+<BlogImage src={BaseDesign} alt="The base design for the website" />
 
+I wanted to make the design simple, and leave the focus on the infinite canvas. So I made a conscious decision to treat the sidebar not as a collection of the user's created boards, but their "open" boards. This way users only keep the boards relevant to them on screen. The bottom bar as well, I lowered its opacity when the user isn't focused on it to reduce clutter.
+
+<BlogImage src={WebDesign} alt="A look of the actual design, the theme is customizable" />
+
+The often forgotten part about creating an interactable infinite canvas is making it mobile friendly. The size of a phone screen can make it difficult to edit items, especially images, which often don't fit on screen. To solve this I took inspiration from Figma and made the canvas view only when the screen size was too small.
+
+Overall I made purposeful decisions to keep the site simple, while packing it with tons of features perfect for visual designers.
+
+<BlogImage src={MobileDesign} alt="The same board on mobile" />
+
+
+## Development
+### Managing State (Syncing, Ctrl Z + Ctrl Y)
+A simple board needs to constantly sync it's state with the backend. In order to keep the board consistent with the database, I needed to develop a method that keeps user experience smooth and allow continuous updates.
+
+
+
+
+### Text and Image Editor
+### Board Block Relationships
 
 
 ## Project Documentation
