@@ -26,9 +26,13 @@ const { show } = Astro.props;
     </defs>
 
     <rect class="chip-center" x="142.5" y="142.5" width="200" height="200" rx="12" />
-    {show && (
-          <text class="chip-label" x="242.5" y="242.5" text-anchor="middle" dominant-baseline="central">LZ</text>
-    )}
+    <text
+      class:list={["chip-label", { "chip-label--mobile-only": !show }]}
+      x="242.5"
+      y="242.5"
+      text-anchor="middle"
+      dominant-baseline="central"
+    >LZ</text>
 
     <g class="traces">
       <path class="trace thin" pathLength="100" d="M 172.5 142.5 L 172.5 80 L 130 50" />
@@ -116,6 +120,14 @@ const { show } = Astro.props;
     letter-spacing: 0.04em;
     pointer-events: none;
     user-select: none;
+
+    &--mobile-only {
+      display: none;
+
+      @media (max-width: 800px) {
+        display: block;
+      }
+    }
   }
 
   .trace {

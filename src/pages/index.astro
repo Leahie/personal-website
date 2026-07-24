@@ -10,32 +10,33 @@ import ButtonLink from '@/components/buttonlink.astro';
 ---
 
 <Layout>
-	<div style=" display: flex;  position:relative; justify-content: center; align-items: center; height: 100vh
- ">
+	<div class="home-shell">
 		<div class="hero-container">
 
 			<div class="hero-underlay"></div>
 
+			<div class="chip">
+				<CircuitChip show={false} />
+			</div>
+
 			<div class="hero">
-				<Image src={homeCard}  alt="Main page" />
+				<Image src={homeCard}  alt="Main page" class="hero-image" />
 				<div class="floating-content">
-					<ButtonBar>
-						{
-							navLinks.map(({ name, link }) => (
-								<ButtonLink href={link}>
-									{name}
-								</ButtonLink>
-							))
-						}
-					</ButtonBar>
 					<div class="floating-badge">
 						<Socials />
 					</div>
-					
+					<div class="floating-nav">
+						<ButtonBar>
+							{
+								navLinks.map(({ name, link }) => (
+									<ButtonLink href={link}>
+										{name}
+									</ButtonLink>
+								))
+							}
+						</ButtonBar>
+					</div>
 				</div>
-			</div>
-			<div class="chip">
-				<CircuitChip show={false} />
 			</div>
 		</div>
 
@@ -43,6 +44,14 @@ import ButtonLink from '@/components/buttonlink.astro';
 </Layout>
 
 <style>
+	.home-shell {
+		display: flex;
+		position: relative;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+	}
+
 	.hero-container {
 		width: 65%;
 		position: relative;
@@ -90,11 +99,11 @@ import ButtonLink from '@/components/buttonlink.astro';
 
 		animation: counterRotateHero 1s cubic-bezier(0.25, 1, 0.5, 1) 2.5s forwards;
 	}
-    .hero img {
+    .hero :global(img),
+    .hero :global(.hero-image) {
         width: 100%;
         height: auto;
         display: block;
-
     }
 
 	.floating-content{
@@ -108,6 +117,11 @@ import ButtonLink from '@/components/buttonlink.astro';
 		align-items: end;
 		
 		gap: 10px;
+	}
+
+	/* Desktop: buttons above socials (original order) */
+	.floating-nav {
+		order: -1;
 	}
 
 	.floating-badge {
@@ -138,7 +152,6 @@ import ButtonLink from '@/components/buttonlink.astro';
 			transform: scale(1.03) translate(20px, -15px);
 		}
 	}
-
 	@keyframes counterRotateHero {
 		0% {
 			transform: rotate(0deg);
@@ -156,6 +169,86 @@ import ButtonLink from '@/components/buttonlink.astro';
 		}
 		.hero-underlay {
 			transform: rotate(-5deg) scale(1.05) translate(20px, -15px);
+		}
+	}
+
+	@media (max-width: 800px) {
+		.home-shell {
+			justify-content: center;
+			align-items: center;
+			padding: 2rem 1.5rem;
+			height: 100vh;
+			min-height: 100vh;
+		}
+
+		.hero-container {
+			width: 100%;
+			animation: none;
+			transform: none;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.hero-underlay {
+			display: none;
+		}
+
+		.chip {
+			position: static;
+			width: min(85vw, 320px);
+			z-index: auto;
+			/* Nudge left; increase the px to move further */
+			transform: translateX(18px) translateY(20px);
+
+		}
+
+		.hero {
+			animation: none;
+			transform: none;
+			box-shadow: none;
+			background-color: transparent;
+			border-radius: 0;
+			overflow: visible;
+			justify-content: center;
+			align-items: center;
+			width: auto;
+		}
+
+		.hero :global(img),
+		.hero :global(.hero-image) {
+			display: none;
+		}
+
+		.floating-content {
+			position: static;
+			top: auto;
+			right: auto;
+			align-items: start;
+			gap: 10px;
+		}
+/* 
+		.floating-nav {
+			order: 0;
+		} */
+
+		.floating-nav :global(.button-link) {
+			color: var(--pale);
+			background-color: var(--med);
+		}
+
+		.floating-nav :global(.button-link:hover) {
+			background-color: var(--light);
+			color: var(--white);
+			box-shadow: none;
+		}
+
+		.floating-badge {
+			background-color: transparent;
+			box-shadow: none;
+			padding: 0;
+			border-radius: 0;
+			justify-content: center;
 		}
 	}
 </style>
