@@ -16,7 +16,9 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
 ---
 
 <html lang="en">
-  <Head title={title} permalink={permalink} />
+  <head>
+    <Head title={title} permalink={permalink} />
+  </head>
   <body>
     <Navbar />
     <main>
