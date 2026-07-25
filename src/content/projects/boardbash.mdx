@@ -13,6 +13,9 @@ import PureRef from "@/assets/documents/boardbash/pureref.png";
 import BaseDesign from "@/assets/documents/boardbash/basedesign.png";
 import WebDesign from "@/assets/documents/boardbash/webdesign.png";
 import MobileDesign from "@/assets/documents/boardbash/mobiledesign.png";
+import SystemsContextDesign from "@/assets/documents/boardbash/usecontextstates.png";
+import Types from "@/assets/documents/boardbash/types.png";
+
 
 This was the first big project I ever tried to make. It was initially for a class hosted by DTI (a Cornell project team) called Trends in Web Development, but later I decided to finish it off on my own. Here's the journey I went through to create and market this project!
 
@@ -54,21 +57,38 @@ Overall I made purposeful decisions to keep the site simple, while packing it wi
 
 
 ## Development
-### Managing State (Syncing, Ctrl Z + Ctrl Y)
-A simple board needs to constantly sync it's state with the backend. In order to keep the board consistent with the database, I needed to develop a method that keeps user experience smooth and allow continuous updates.
+When I started this project I had no idea how much *WORK* these apps (Canva, Google Docs, Google Slides, Figma) did to ensure everything looked seamless. Building this site taught me that there was so much more beneath the scenes. 
 
-// describe the overall idea
+On a high level, my app has three main interconnected features: the overall state, the text and image editor, and the board and block relationship. I'll break down each in the next sections. Briefly remember I am building this website with this goal in mind: I want to create hierarchical infinite canvas boards with interactable blocks. 
+### Managing State 
+A simple board needs to constantly sync it's state with the backend. I had to focus on the board's state and the opened board's relationships, Notion's nested boarding. To do this, I used React's useContext hooks to propogate this shared state accross all frontend components. I had three big ones: the data context, sidebar context, and editor context. 
 
-// the global states brokendown graph
-// explaining stuff individually
- 
+The data context takes care of api calls with the changing board and block data. This was the primary context; it held the syncing, block metadata (location, size, etc), board data. 
 
+The sidebar context keeps track of the currently open boards, pinned boards, and boards that also double as folders.
+
+The editor context deals with the undo and redo stack, block selection, copying blocks onto the clipboard happened here. 
+
+<BlogImage src={SystemsContextDesign} alt="A visual to help simplify things" />
+
+So the data context focused on both the boards and blocks, containing the actual information polled from the backend. The sidebar context and editor context used ids to interact with the data context. The sidebar context primarly focused on the relationship between boards, while the editor context focused almost entirely on the current active board's blocks. 
+
+This modularization was deliberate. I wanted to focus my useContext hooks on the two main focuses of the app, the boards and the blocks.  
+
+<BlogImage src={Types} alt="I made the Block type an interface so I could easily extend it and add more block types" />
+
+The types look simple, but they took time to perfect. 
+
+The idea of treating boards as linked nodes came to me instantly, but I didn't initially separate blocks from boards. Initially boards were a type of block called BoardBlock. I think keeping it like that could've worked, but it grew overcomplicated as I kept thinking about different edge cases. 
+
+Boards inherently deal with a different set of responsibilities compared to blocks e.g. sharing, routing, archiving. Since I dealt with them individually so often, it felt smarter to make board its own type.
 
 ### Text and Image Editor
 ### Board Block Relationships
 
 
 ## Project Documentation
+A compilation of notes from when I was actually working on the project.
 
 <iframe
   src="/documents/boardbash/boardbash-1.pdf"
