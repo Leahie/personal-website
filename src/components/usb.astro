@@ -197,6 +197,25 @@ const detailHref = `/projects/${project.slug}`;
 
   }
 
+  /* Phone: USB stick only — no holographic projection on tap */
+  @media (max-width: 600px) {
+    .projector-beam,
+    .hologram-display {
+      display: none !important;
+    }
+
+    .usb-node:hover {
+      .projector-beam,
+      .hologram-display,
+      .holo-content {
+        display: none !important;
+        animation: none;
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+  }
+
   @keyframes holoManifestCard {
     to {
       opacity: 1;
