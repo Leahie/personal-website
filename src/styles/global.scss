@@ -21,8 +21,10 @@
 }
 
 :root {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
     font-size: 1rem;
+    font-synthesis: weight;
+    -webkit-font-smoothing: antialiased;
 
     --white: #ECE7D1;
     --pale: #DBCEA5;

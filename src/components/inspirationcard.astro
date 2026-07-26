@@ -137,12 +137,18 @@ const cardStyle = `--card-ar: ${imgSrc.width} / ${imgSrc.height}`;
   }
 
   .card:has(.inspiration-card--link) {
-    transition: transform 0.3s ease;
     cursor: pointer;
   }
 
-  .card:has(.inspiration-card--link):hover {
-    transform: scale(1.04);
+  /* Scale only on fine pointers — sticky :hover scale on iPad fights taps */
+  @media (hover: hover) and (pointer: fine) {
+    .card:has(.inspiration-card--link) {
+      transition: transform 0.3s ease;
+    }
+
+    .card:has(.inspiration-card--link):hover {
+      transform: scale(1.04);
+    }
   }
 
   .card-pads-container {
@@ -231,6 +237,7 @@ const cardStyle = `--card-ar: ${imgSrc.width} / ${imgSrc.height}`;
   }
 
   .card:hover .inspiration-card--link .inspiration-card-img,
+  .card:active .inspiration-card--link .inspiration-card-img,
   .card:focus-within .inspiration-card--link .inspiration-card-img {
     filter: blur(0);
     transform: scale(1);
@@ -267,6 +274,8 @@ const cardStyle = `--card-ar: ${imgSrc.width} / ${imgSrc.height}`;
 
   .card:hover .inspiration-card-shade,
   .card:hover .card-meta,
+  .card:active .inspiration-card-shade,
+  .card:active .card-meta,
   .card:focus-within .inspiration-card-shade,
   .card:focus-within .card-meta {
     opacity: 0;

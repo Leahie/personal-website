@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './TrunkNavigator.css';
 
 type InspirationData = Record<string, unknown[]>;
 
 export default function TrunkNavigator({ data }: { data: InspirationData }) {
   const [currentTab, setCurrentTab] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const tabs = Object.keys(data);
 
   const announceTab = (tab: string | null) => {
@@ -21,6 +23,18 @@ export default function TrunkNavigator({ data }: { data: InspirationData }) {
     setCurrentTab(initial);
     announceTab(initial);
   }, [data]);
+
+  // Touch devices stick :hover after tap — close when tapping outside instead.
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!wrapperRef.current?.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [open]);
 
   const handleTabChange = (tab: string | null) => {
     setCurrentTab(tab);
@@ -41,7 +55,17 @@ export default function TrunkNavigator({ data }: { data: InspirationData }) {
 
   return (
     <div className="trunk-navigator-container">
-      <div className="trunk-wrapper">
+      <div
+        ref={wrapperRef}
+        className={`trunk-wrapper${open ? ' is-open' : ''}`}
+        onClick={() => setOpen(true)}
+        onMouseLeave={() => {
+          // Don't clear on touch — iOS can fire mouseleave right after tap.
+          if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+            setOpen(false);
+          }
+        }}
+      >
         <div className="trunk-stage">
           <div className="rings-overlay">
             {(() => {

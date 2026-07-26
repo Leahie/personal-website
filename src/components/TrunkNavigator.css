@@ -8,6 +8,8 @@
 /*
   Hanging semicircle (ellipse clipped from the top).
   Top stays fixed; height shrinks/grows so the bottom rises/falls.
+  clip-path (not just overflow + border-radius) so WebKit/iPad
+  doesn't briefly paint the full ring circles mid-transition.
 */
 .trunk-wrapper {
   --semi-ratio: 2 / 1;
@@ -22,13 +24,38 @@
   margin: 0 0 2rem;
   container-type: inline-size;
   border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  clip-path: ellipse(50% 100% at 50% 0%);
+  -webkit-clip-path: ellipse(50% 100% at 50% 0%);
   background: var(--black);
   transition:
     height 0.55s cubic-bezier(0.4, 0, 0.2, 1),
     background 0.4s ease;
+  cursor: pointer;
 }
 
-.trunk-wrapper:hover {
+/* Desktop: hover expands. Touch uses .is-open (sticky :hover flashes full rings). */
+@media (hover: hover) and (pointer: fine) {
+  .trunk-wrapper:hover {
+    height: var(--expanded-height);
+    background: linear-gradient(
+      180deg,
+      var(--black) 0%,
+      var(--med) 55%,
+      var(--light) 140%
+    );
+  }
+
+  .trunk-wrapper:hover .collapsed-topic {
+    opacity: 0;
+  }
+
+  .trunk-wrapper:hover .rings-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.trunk-wrapper.is-open {
   height: var(--expanded-height);
   background: linear-gradient(
     180deg,
@@ -66,7 +93,7 @@
   transition: opacity 0.2s ease;
 }
 
-.trunk-wrapper:hover .collapsed-topic {
+.trunk-wrapper.is-open .collapsed-topic {
   opacity: 0;
 }
 
@@ -79,7 +106,7 @@
   transition: opacity 0.3s ease 0.06s;
 }
 
-.trunk-wrapper:hover .rings-overlay {
+.trunk-wrapper.is-open .rings-overlay {
   opacity: 1;
   pointer-events: auto;
 }
