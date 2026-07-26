@@ -37,106 +37,63 @@
     },
     {
       "title": "Colored Pencil",
-      "subtitle": "",
+      "subtitle": "and unfinished potential.",
       "image": "Portfolio/RecentWorks/fruit.jpg"
-    },
-    {
-      "title": "Escape",
-      "subtitle": "",
-      "image": "Portfolio/RecentWorks/Reach-for-Hope.jpg"
-    },
-    {
-      "title": "Observation One",
-      "subtitle": "The other students at my old art studio.",
-      "image": "Portfolio/Older-Works/Obser1.jpg"
-    },
-    {
-      "title": "Observation Two",
-      "subtitle": "A storage closet in my old art studio.",
-      "image": "Portfolio/Older-Works/Obser2.jpg"
-    },
-    {
-      "title": "The Bus Stop",
-      "subtitle": "Grandma or young boy? I can't remember anymore.",
-      "image": "Portfolio/Older-Works/Time-Stop.jpg"
-    },
-    {
-      "title": "The Person In The Mirror",
-      "subtitle": "Self-reflection is difficult; self-awareness is a journey. In this piece, the figure gazing into the mirror is surprised by what she finds—is she really this angry? ",
-      "image": "Portfolio/RecentWorks/The-Person-In-The-Mirror.jpg"
-    },
-    
-    {
-      "title": "Water",
-      "subtitle": "",
-      "image": "Portfolio/Older-Works/Water.png"
-    },
-    {
-      "title": "Art Gallery",
-      "subtitle": "Poster art for AI&Us exhibition.",
-      "image": "Portfolio/Older-Works/Illustration2.png"
-    },
-  
-    {
-      "title": "Skin, Muscles, and Bones",
-      "subtitle": "Underneath my face’s skin and muscles is just my skull. I wonder if my parents would be able to recognize me from a row of skulls.",
-      "image": "Portfolio/RecentWorks/10.jpg"
-    },
-    {
-      "title": "Smashing the Spinal Cord",
-      "subtitle": "",
-      "image": "Portfolio/RecentWorks/STSC.jpg"
-    },
-    {
-      "title": "Observation Three",
-      "subtitle": "My art classroom.",
-      "image": "Portfolio/RecentWorks/Observ.jpg"
     },
     {
       "title": "Time's Grasp",
       "subtitle": "In Latin, we learned about the Fates, three older women who determined human destinies. I find myself thinking of these Fates anytime when I begin to feel the pressure of time.",
       "image": "Portfolio/RecentWorks/Times-Grasps.jpg"
-    },
+    }, 
     {
-      "title": "The Blacksmith",
-      "subtitle": "",
-      "image": "Portfolio/AI&Us/The-Blacksmith.jpg"
-    },
-    {
-      "title": "She died as she lived. Independent",
-      "subtitle": "The title is a quip on the fact that all her body parts are independent to each other.",
-      "image": "Portfolio/RecentWorks/11.jpg"
-    },
-    {
-      "title": "A Computer's Core",
-      "subtitle": "Also the cover for Teknos 2024.",
-      "image": "Portfolio/AI&Us/A-Computer-Core.jpg"
+      "title": "What Making Art Feels Like",
+      "subtitle": "I hope this piece makes you hear the Bwring. Brianngg. Brrraapppttt.",
+      "image": "Portfolio/RecentWorks/STSC.jpg"
     },
 
     
+    
+    {
+      "title": "The Blacksmith",
+      "subtitle": " Are LLMs the first human made tool that we don't fully understand? Like the wild wires coming from the blacksmith's hammer, we created something chaotic and unpredictable. (A more humorous interpretation: what vibecoding feels like)",
+      "image": "Portfolio/AI&Us/The-Blacksmith.jpg"
+    },
     {
       "title": "Ticking Egg Bomb",
-      "subtitle": "",
+      "subtitle": "I'm always bad at putting my art into words. It's the idea that we think disaster will come in a huge casscading explosion. Like the brown eggs armed with dynamite that'll trigger one after another. When in fact the explosion might've already happened, but it's form is so different, and it's expansion so slow, we don't even notice it already exploded on the eggs around it.",
       "image": "Portfolio/AI&Us/Ticking-Egg-Bomb.png"
     },
     {
-      "title": "A Fully Connected Neural Network",
-      "subtitle": "In this self-portrait, I’m gazing up at this new, seemingly limitless version of machine learning in wonder and a twinge of fear: where will machine learning take us next?",
-      "image": "Portfolio/AI&Us/A-Fully-Connected Neural-Network.jpg"
-    },
-    {
-      "title": "Flower -no- Girl",
-      "subtitle": "Also the cover for Threshold 2024.",
-      "image": "Portfolio/AI&Us/Flower-No-Girl.jpg"
+      "title": "Observation One",
+      "subtitle": "The other students at my old art studio.",
+      "image": "Portfolio/Older-Works/Obser1.jpg"
     }
   ],
   "misc": [
     {
       "title": "ATconnect",
       "date": "2025-4-26",
-      "subtitle": "I initiated the first ATconnect event in 2025 connecting students and companies across the county to create and share their assistive technology with students with disabilities. I am proud that the club continued this event in 2026 and managed to reach over 140 people!",
+      "subtitle": "I initiated the first ATconnect event in 2025 connecting students and companies across the county to create and share their assistive technology with students with disabilities. I am proud that the club is continuing this event even after I left. They managed to reach over 140 people in 2026!",
       "url": "https://tjatc.org/atconnect",
       "image": "Research/atconnect.png"
+    },
+    {
+      "title": "Good Hang with Amy Poehler",
+      "subtitle": "Recently I've really been enjoying this podcast. I like how Amy Poehler makes it her mission to keep it lighthearted and fun, to lighten up other people's day no matter what.",
+      "url": "https://open.spotify.com/show/1z20EiwuKoDiftKxMVLde1",
+      "image": "Research/Good_Hang_with_Amy_Poehler.jpg"
+    },
+    
+    {
+      "title": "The Big Swing by McKenna Harris",
+      "subtitle": "A story sequence that I think about a lot. It's powerful to me because it touches on the universal feeling of 'saying goodbye' through a very unique story device. ",
+      "url": "https://mckennaharris.blogspot.com/2018/06/the-big-swing-apprenticeship-assignment.html",
+      "image": "Research/tbs.jpg"
+    },
+    {
+      "title": "The Paper Menagerie and Other Stories by Ken Liu",
+      "subtitle": "A book recommended by someone I admire. It introduced me to the science fiction genre and made me realize I love a story that makes me cry.",
+      "image": "Research/tpm.jpg"
     }
   ]
   

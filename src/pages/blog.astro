@@ -6,21 +6,25 @@ import inspirationData from '@/data/inspiration.json';
 
 const tabs = Object.keys(inspirationData);
 
-/** Round-robin: one from each tab per pass until all queues are empty. */
+/** Pull from tabs in cycle order (e.g. research, art, misc, art…) until empty. */
 function interleaveTabs(
   data: typeof inspirationData,
-  tabKeys: string[]
+  cycle: string[]
 ) {
-  const queues = tabKeys.map((tab) =>
-    data[tab].map((item) => ({ tab, item }))
-  );
-  const ordered: { tab: string; item: (typeof inspirationData)[string][number] }[] = [];
+  const queues = Object.fromEntries(
+    Object.keys(data).map((tab) => [
+      tab,
+      data[tab].map((item) => ({ tab, item })),
+    ])
+  ) as Record<string, { tab: string; item: (typeof inspirationData)[string][number] }[]>;
 
+  const ordered: { tab: string; item: (typeof inspirationData)[string][number] }[] = [];
   let anyLeft = true;
+
   while (anyLeft) {
     anyLeft = false;
-    for (const queue of queues) {
-      const next = queue.shift();
+    for (const tab of cycle) {
+      const next = queues[tab]?.shift();
       if (next) {
         ordered.push(next);
         anyLeft = true;
@@ -31,7 +35,12 @@ function interleaveTabs(
   return ordered;
 }
 
-const interleaved = interleaveTabs(inspirationData, tabs);
+const interleaved = interleaveTabs(inspirationData, [
+  'research',
+  'art',
+  'misc',
+  'art',
+]);
 ---
 
 <PageLayout title="Blog" permalink="/blog">

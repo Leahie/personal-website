@@ -143,7 +143,7 @@
 
 @media (max-width: 600px) {
   .trunk-wrapper {
-    --collapsed-height: 2.25rem;
-    --expanded-height: calc(100cqi * 0.2);
+    --collapsed-height: 2.5rem;
+    --expanded-height: calc(100cqi * 0.3);
   }
 }
