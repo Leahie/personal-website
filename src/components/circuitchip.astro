@@ -1,13 +1,16 @@
 ---
 interface Props {
     show: boolean;
+    /** Navbar chip — traces stay collapsed on phone (clipped by the tight logo box). */
+    nav?: boolean;
 }
 
-const { show } = Astro.props;
+const { show, nav = false } = Astro.props;
 
 ---
 
-<div class="chip-container">
+
+<div class:list={['chip-container', { 'chip-container--nav': nav }]}>
   <!-- Padded viewBox: strokes/nodes/glow sit on x=0 and near y=0 and would clip otherwise -->
   <svg viewBox="-60 -60 680 600" class="circuit-svg" xmlns="http://www.w3.org/2000/svg" overflow="visible">
     <defs>
@@ -219,5 +222,25 @@ const { show } = Astro.props;
   @keyframes chipPulse {
     0%, 100% { stroke: $color-primary; fill: #3E3F29; }
     50%, 60% { stroke: $color-flash; fill: #3E3F29; filter: drop-shadow(0 0 12px rgba($color-flash, 0.5)); }
+  }
+
+  /* Phone navbar: logo box + translate clips expanding traces on iOS — keep chip only */
+  @media (max-width: 600px) {
+    .chip-container--nav {
+      .trace,
+      .node {
+        animation: none;
+      }
+
+      .trace {
+        opacity: 0;
+        stroke-dashoffset: 100;
+      }
+
+      .node {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
   }
 </style>
