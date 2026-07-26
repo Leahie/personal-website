@@ -1,4 +1,6 @@
 ---
+import Link from '@lucide/astro/icons/link';
+
 interface Props {
   project: {
     title: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 const { project, index } = Astro.props;
 const detailHref = `/projects/${project.slug}`;
+
 ---
 <div 
     class="usb-node" 
@@ -53,7 +56,7 @@ const detailHref = `/projects/${project.slug}`;
         <p>{project.description}</p>
         <div style="display:flex; gap:10px">
             <a href={detailHref}>Learn More</a>
-            <a href={project.url} target="_blank" rel="noopener noreferrer">Link ↗</a>
+            <a href={project.url} target="_blank" rel="noopener noreferrer">Link <Link width=8 height=8 stroke-width=3 /></a>
         </div>
       </div>
     </div>

@@ -95,9 +95,8 @@ const interleaved = interleaveTabs(inspirationData, tabs);
     }
 
     .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        column-count: 2;
+        column-gap: 20px;
         width: 100%;
         max-width: 900px;
         padding: 0 20px;
@@ -107,6 +106,9 @@ const interleaved = interleaveTabs(inspirationData, tabs);
     .card-slot {
         width: 100%;
         min-width: 0;
+        margin-bottom: 20px;
+        break-inside: avoid;
+        page-break-inside: avoid;
     }
 
     .card-slot[hidden] {
@@ -115,7 +117,7 @@ const interleaved = interleaveTabs(inspirationData, tabs);
 
     @media (max-width: 600px) {
         .cards-grid {
-            grid-template-columns: 1fr;
+            column-count: 1;
         }
     }
 </style>

@@ -124,6 +124,28 @@ import Socials from '@/components/socials.astro';
         scale: -.7 .7;
     }
 
+    
+	.about-text a {
+		text-decoration: none;
+		color: var(--med);
+		font-weight: 700;
+		text-decoration-line: underline;
+		text-decoration-thickness: 2.5px;
+		text-underline-offset: 4px;
+		text-decoration-color: var(--med);
+		/* white fill grows left → right on hover */
+		background-image: linear-gradient(var(--white), var(--white));
+		background-position: 0 0;
+		background-repeat: no-repeat;
+		background-size: 0% 100%;
+		transition: background-size 0.25s cubic-bezier(0.7, 0, 1, 1); /* slow → fast */
+
+		&:hover,
+		&:focus-visible {
+			background-size: 100% 100%;
+		}
+	}
+
     @keyframes slideOut {
         from {
             translate: 0px 0px;

@@ -2,6 +2,8 @@
 import Head from '@/components/head.astro';
 import Navbar from '@/components/navbar.astro';
 import '../styles/global.scss';
+import Link from '@lucide/astro/icons/arrow-up-right';
+
 
 interface Props {
   title: string;
@@ -25,7 +27,8 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
       <header class="project-header">
         <h1>{title} {link && (
           <a href={link} target="_blank" rel="noopener noreferrer">
-            Link ↗
+            Link    <Link width="12" height="12"/>
+
           </a>
         )}
         </h1> 
@@ -99,7 +102,10 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
     line-height: 1.6;
   }
    a {
-        display: inline-block;
+        display: inline-flex; 
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
         position: relative;
         transition: 0.2s;
         font-size:12px;
@@ -108,6 +114,7 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
         box-shadow: none;
         padding: 0;
         font-weight: inherit;
+        align-items: center;
     }
 
     a:hover {
