@@ -6,6 +6,8 @@ type InspirationData = Record<string, unknown[]>;
 export default function TrunkNavigator({ data }: { data: InspirationData }) {
   const [currentTab, setCurrentTab] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  // CSS keyframe intro: expanded → collapsed (~2s) on first paint.
+  const [intro, setIntro] = useState(true);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const tabs = Object.keys(data);
 
@@ -24,6 +26,33 @@ export default function TrunkNavigator({ data }: { data: InspirationData }) {
     announceTab(initial);
   }, [data]);
 
+  // Clear intro after the collapse animation so hover/open styles can take over.
+  useEffect(() => {
+    if (!intro) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIntro(false);
+      return;
+    }
+
+    const el = wrapperRef.current;
+    if (!el) return;
+
+    const finish = () => setIntro(false);
+    const onEnd = (e: AnimationEvent) => {
+      if (e.target === el && e.animationName === 'trunk-intro-collapse') {
+        finish();
+      }
+    };
+
+    el.addEventListener('animationend', onEnd);
+    // Fallback if animationend is missed (e.g. display:none mid-flight).
+    const fallback = window.setTimeout(finish, 2200);
+    return () => {
+      el.removeEventListener('animationend', onEnd);
+      window.clearTimeout(fallback);
+    };
+  }, [intro]);
+
   // Touch devices stick :hover after tap — close when tapping outside instead.
   useEffect(() => {
     if (!open) return;
@@ -36,7 +65,10 @@ export default function TrunkNavigator({ data }: { data: InspirationData }) {
     return () => document.removeEventListener('pointerdown', onPointerDown);
   }, [open]);
 
+  const endIntro = () => setIntro(false);
+
   const handleTabChange = (tab: string | null) => {
+    endIntro();
     setCurrentTab(tab);
     const newUrl = new URL(window.location.href);
     if (tab) {
@@ -57,8 +89,17 @@ export default function TrunkNavigator({ data }: { data: InspirationData }) {
     <div className="trunk-navigator-container">
       <div
         ref={wrapperRef}
-        className={`trunk-wrapper${open ? ' is-open' : ''}`}
-        onClick={() => setOpen(true)}
+        className={[
+          'trunk-wrapper',
+          intro ? 'is-intro' : '',
+          open && !intro ? 'is-open' : '',
+        ]
+          .filter(Boolean)
+          .join(' ')}
+        onClick={() => {
+          endIntro();
+          setOpen(true);
+        }}
         onMouseLeave={() => {
           // Don't clear on touch — iOS can fire mouseleave right after tap.
           if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {

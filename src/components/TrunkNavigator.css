@@ -65,6 +65,80 @@
   );
 }
 
+/*
+  Page-load hint: hold expanded (~0.9s), then collapse into the topic strip.
+  Runs from first paint (SSR class) so it doesn't wait on hydration.
+*/
+.trunk-wrapper.is-intro {
+  animation: trunk-intro-collapse 1s cubic-bezier(0.7, 0.1, 0.2, 1) forwards;
+}
+
+.trunk-wrapper.is-intro .rings-overlay {
+  pointer-events: none;
+  animation: trunk-intro-rings 1s ease forwards;
+}
+
+.trunk-wrapper.is-intro .collapsed-topic {
+  animation: trunk-intro-topic 1s ease forwards;
+}
+
+@keyframes trunk-intro-collapse {
+  0%,
+  45% {
+    height: var(--expanded-height);
+    background: linear-gradient(
+      180deg,
+      var(--black) 0%,
+      var(--med) 55%,
+      var(--light) 140%
+    );
+  }
+
+  100% {
+    height: var(--collapsed-height);
+    background: var(--black);
+  }
+}
+
+@keyframes trunk-intro-rings {
+  0%,
+  45% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes trunk-intro-topic {
+  0%,
+  45% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trunk-wrapper {
+    transition: none;
+  }
+
+  .trunk-wrapper.is-intro,
+  .trunk-wrapper.is-intro .rings-overlay,
+  .trunk-wrapper.is-intro .collapsed-topic {
+    animation: none;
+  }
+
+  .trunk-wrapper .collapsed-topic,
+  .trunk-wrapper .rings-overlay {
+    transition: none;
+  }
+}
+
 /* Full dome geometry, pinned to top — never translates */
 .trunk-stage {
   position: absolute;

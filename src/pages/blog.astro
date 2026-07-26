@@ -47,13 +47,13 @@ const interleaved = interleaveTabs(inspirationData, [
     <h1>the muse</h1>
 
     <div class="blog-stage">
-        <TrunkNavigator client:visible data={inspirationData} />
+        <TrunkNavigator client:load data={inspirationData} />
 
-        <div class="cards-grid" id="inspiration-cards" data-tabs={tabs.join(',')}>
+        <div class="cards-grid" id="inspiration-cards" data-tabs={tabs.join(',')} data-active-tab="all">
             {
                 interleaved.map(({ tab, item }) => (
                     <div class="card-slot" data-tab={tab}>
-                        <InspirationCard item={item} />
+                        <InspirationCard item={item} category={tab} />
                     </div>
                 ))
             }
@@ -75,6 +75,10 @@ const interleaved = interleaveTabs(inspirationData, [
 
     function applyTab(tab: string | null) {
         const active = normalizeTab(tab);
+        const grid = document.getElementById('inspiration-cards');
+        if (grid) {
+            grid.dataset.activeTab = active ?? 'all';
+        }
         const slots = document.querySelectorAll<HTMLElement>('#inspiration-cards .card-slot');
         slots.forEach((slot) => {
             const show = !active || slot.dataset.tab === active;
@@ -111,6 +115,11 @@ const interleaved = interleaveTabs(inspirationData, [
         max-width: 900px;
         padding: 8px 10px 20px;
         box-sizing: border-box;
+    }
+
+    /* Category label only when browsing "all" */
+    .cards-grid:not([data-active-tab='all']) :global(.card-category) {
+        display: none;
     }
 
     .card-slot {

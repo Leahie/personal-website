@@ -1,14 +1,14 @@
 {
     "research": [
     {
-      "title": "Pacific Symposium on Biocomputing 2025",
+      "title": "Conference at Pacific Symposium on Biocomputing 2025",
       "date": "2025",
       "subtitle": "Built BERTopic/LDA models off of webscrapped papers for their 30th anniversary. Got to go on a fun trip to Hawaii for the conference.",
       "url": "https://pubmed.ncbi.nlm.nih.gov/39670358/",
       "image": "Research/psb.png"
     },
     {
-      "title": "Placenta Villi Clustering",
+      "title": "Dartmouth's EDIT Placenta Villi Clustering Project",
       "date": "2024",
       "subtitle": "Used CV to cluster placenta villi to unify pathologist disagreement. Work eventually published in journal \"Placenta\".",
       "url": "https://pubmed.ncbi.nlm.nih.gov/40313259/",
@@ -22,9 +22,9 @@
       "image": "Research/aeop.png"
     },
     {
-      "title": "Art With Parkinson's",
+      "title": "HS Senior Research Project: Art With Parkinson's",
       "date": "2024-2025",
-      "subtitle": "My senior research project. This is inspired by my time teaching art at my grandma's retirement home. I used deep learning to create a corrective algorithm.",
+      "subtitle": "This is inspired by my time teaching art at my grandma's retirement home. I used deep learning to create a corrective algorithm.",
       "url": "https://drive.google.com/file/d/14foV9oLBTsVq-wdQ9f0yQbXRKXQXUeUW/view?usp=sharing",
       "image": "Research/awp.png"
     }
@@ -71,7 +71,7 @@
   ],
   "misc": [
     {
-      "title": "ATconnect",
+      "title": "First ever HS led Assistive Technology Fair",
       "date": "2025-4-26",
       "subtitle": "I initiated the first ATconnect event in 2025 connecting students and companies across the county to create and share their assistive technology with students with disabilities. I am proud that the club is continuing this event even after I left. They managed to reach over 140 people in 2026!",
       "url": "https://tjatc.org/atconnect",

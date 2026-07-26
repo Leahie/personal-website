@@ -14,9 +14,10 @@ interface Props {
     desc?: string;
     url?: string;
   };
+  category?: string;
 }
 
-const { item } = Astro.props;
+const { item, category } = Astro.props;
 
 // Explicit globs — keep Portfolio + Research (avoid matching junk / broken public links)
 const assetModules = {
@@ -70,6 +71,9 @@ const cardStyle = `--card-ar: ${imgSrc.width} / ${imgSrc.height}`;
       <circle cx="22" cy="9" r="2" />
       <circle cx="35" cy="9" r="2" />
     </svg>
+    {category && (
+      <p class="card-category">{category}</p>
+    )}
      { hasUrl && 
     <div class="card-pads-container">
       <Link width="12" height="12" stroke-width="3"/>
@@ -179,6 +183,27 @@ const cardStyle = `--card-ar: ${imgSrc.width} / ${imgSrc.height}`;
     height: 18px;
     pointer-events: none;
     z-index: 1;
+  }
+
+  .card-category {
+    position: absolute;
+    top: 4px;
+    left: 60px;
+    right: 36px;
+    z-index: 1;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    height: 18px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--med);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
   }
 
   .card-pads circle {
