@@ -18,6 +18,7 @@ import Types from "@/assets/documents/boardbash/types.png";
 import ImageEditing from "@/assets/documents/boardbash/imageediting.png";
 import TextEditing from "@/assets/documents/boardbash/textediting.png";
 import PdfEmbed from "@/components/pdfembed.astro";
+import BoardBlock from "@/assets/documents/boardbash/boardblockrel.png";
 
 
 This was the first big project I ever tried to make. It was initially for a class hosted by DTI (a Cornell project team) called Trends in Web Development, but later I decided to finish it off on my own. Here's the journey I went through to create and market this project!
@@ -101,6 +102,13 @@ In addition to the toolbar, I made a text editor which uses TipTap for its forma
 <BlogImage src={TextEditing} alt="What the text editor looks like" />
 
 ### Board Block Relationships
+I briefly touched on the board and block relationship in the state section, but I want to spend more time explaining it more because it is a very core part of this project. 
+
+Essentially, boards need to exist as individual items that appear on the sidebar, and as blocks that appear on another board's canvas. Rather than use one item, I split this into blocks with the type "board" and gave boards a parentBoardBlockId. 
+
+<BlogImage src={BoardBlock} alt="Root boards are identified by null parentBoardBlockIds." />
+
+
 
 ## Did I accomplish my goal?
 I set out on this project to learn something new and build something cool and I managed to accomplish that! Advertising for this project was rough, but as of July 2026 we managed to reach over 300 users and obtain 2.9k views. It's not crazy, but pretty good for a first project. 
