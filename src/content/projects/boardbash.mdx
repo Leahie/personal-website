@@ -17,6 +17,8 @@ import SystemsContextDesign from "@/assets/documents/boardbash/usecontextstates.
 import Types from "@/assets/documents/boardbash/types.png";
 import ImageEditing from "@/assets/documents/boardbash/imageediting.png";
 import TextEditing from "@/assets/documents/boardbash/textediting.png";
+import PdfEmbed from "@/components/pdfembed.astro";
+
 
 This was the first big project I ever tried to make. It was initially for a class hosted by DTI (a Cornell project team) called Trends in Web Development, but later I decided to finish it off on my own. Here's the journey I went through to create and market this project!
 
@@ -85,33 +87,43 @@ The idea of treating boards as linked nodes came to me instantly, but I didn't i
 Boards inherently deal with a different set of responsibilities compared to blocks e.g. sharing, routing, archiving. Since I dealt with them individually so often, it felt smarter to make board its own type.
 
 ### Text and Image Editor
-The infamous toolbar editing bar thingy is another one of those things that look easy to implement but is a *monster*.
+The infamous toolbar editing bar thingy is another one of those things that look easy to implement but is a *pain*. Since I wanted the site to be friendly on mobile platforms, I couldn't rely on keybinds for block edits. So I took inspiration from google docs and decided to use a floating toolbar. 
+
+The initial idea was simple: when a user clicks on a block the toolbar becomes visible and the user can use it to interact with the block. It got more complicated when I realized it needed to display different editing options based on the block type, as well as be able to handle multi-block selection.
+
+I eventually decided on a greedy approach. Rather than the intersection, I allowed all the possible editing options appear when multiple blocks types are selected. This way the user wouldn't have to do extra work with removing the unwanted block types. 
 <BlogImage src={ImageEditing} alt="What the image editor looks like" />
+The toolbar works together with the editor context and data context. It reads from the editor context the selected IDs and bridges the information gap by getting the block's actual types from the data context. Every mutation (mirroring, cropping, changing the opacity, etc) is pushed to the history stack on the editor context and then synced with the backend using the data context.
+
+To handle the vast amount of operations associated with each block type, I created an Operation interface. Each operation had a common function "apply" that describes the interaction's block edit, and these objects are described in files like universal.ts, image.ts, text.ts. This common function returns a partial block type. I did this because I wanted to compile the operations into a list and batch them so they would apply all at once. 
+
+In addition to the toolbar, I made a text editor which uses TipTap for its formatting.
 <BlogImage src={TextEditing} alt="What the text editor looks like" />
 
 ### Board Block Relationships
 
 ## Did I accomplish my goal?
-## Conclusion
-## What's the next  
+I set out on this project to learn something new and build something cool and I managed to accomplish that! Advertising for this project was rough, but as of July 2026 we managed to reach over 300 users and obtain 2.9k views. It's not crazy, but pretty good for a first project. 
 
+I really enjoyed the process.
+## Conclusion
+Hope you learned something while reading this blog, and feel inspired to create your own project. This is just a very brief overview of certain select components that I felt were cool and fun to share. Of course there's much more that I didn't cover. 
+
+Finally, I couldn't accomplish this project alone. I owe the world to my friend [Joy](https://joywang.vercel.app/) for helping out with the shared board links and building this with me!
+## A sneak peak into the future
+I'm taking a pause on this project right now to work on [skellysearch](https://www.skellysearch.com/). I chatted with some artists and one thing they mentioned that stood out to me was that they wanted a way to quickly photobash new ideas when they were brainstorming for new projects. At my research lab, one of the other undergrads is using SAM and YOLO to quickly segment and identify objects tracked by a user's gaze. That gave me some new ideas for this project that I think will be very interesting. Stay tuned for future updates!
 ## Project Documentation
 A compilation of notes from when I was actually working on the project. It contains designs for the actual application, the landing page, and some pages that never made it onto the site. Hope there's something of value from my convoluted notebook of thoughts.
 
-<iframe
+<PdfEmbed
   src="/documents/boardbash/boardbash-1.pdf"
-  width="100%"
-  height="600px"
-  style="border: none; border-radius: 8px; margin-top: 1rem;"
   title="BoardBash document 1"
-></iframe>
+  label="Open BoardBash document 1"
+/>
 
-
-<iframe
+<PdfEmbed
   src="/documents/boardbash/boardbash-2.pdf"
-  width="100%"
-  height="600px"
-  style="border: none; border-radius: 8px; margin-top: 1rem;"
   title="BoardBash document 2"
-></iframe>
+  label="Open BoardBash document 2"
+/>
 
