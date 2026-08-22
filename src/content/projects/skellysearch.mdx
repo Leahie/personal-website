@@ -8,8 +8,68 @@ techStack:
   - AWS
 link: "http://skellysearch.com/"
 ---
+import BlogImage from "@/components/blogimage.astro";
+import GoogleSearch from "@/assets/documents/skellysearch/googlesearch.png";
+import HSMR from "@/assets/documents/skellysearch/hsmr.png";
+import LandingPage from "@/assets/documents/skellysearch/landingpage.png";
+import Searcher from "@/assets/documents/skellysearch/searcher.png";
+import SketchInput from "@/assets/documents/skellysearch/sketchinput.png";
 
-Sketch-to-pose art reference finder.
+This is a project very important for the younger me who wanted to be an artist and wished to have a tool like this.
 
-## Overview
+## Why did I create this?
+I really wanted to be a storyboard artist when I was a kid. They were so cool! Story artists built the underlying story. They had to understand composition, perspective, anatomy, and timing.  
+
+So I started studying to become one. It was tough learning, but I improved rapidly. During this process there were a few tools I really wished existed, and this project is focused on one particular pain point: the difficulty of finding a pose idea I have in my head online. 
+
+The worst feeling is having a great composition in your head, wanting a particular pose, but not having the ability to ensure anatomical accuracy by finding a close enough reference. Google tries its best, but its inherently difficult to use words to describe a pose.
+
+Take a person sitting. There's so many ways a person can sit, but it's so difficult to discribe the exact angle, the way the legs should interact with each other. All the details that the pose should have, is difficult to translate into words. 
+
+<BlogImage src={GoogleSearch} alt="Example google search." />
+
+That's why I created this project! It's inspired by a preexisting tool called [pose search](https://x6ud.github.io/pose-search/#/), but adds a sketch-to-pose and photo-to-pose pipeline and uses a new pose inference method called [HSMR](https://isshikihugh.github.io/HSMR/) to allow for more anatomical accuracy. It uses a custom blender skeleton modified from [this](https://ko-fi.com/s/19aef67b56) free skeleton vtuber skin I found online to include the ulna-radius movement for more realistic forearm pronation and supination.
+
+<BlogImage src={HSMR} alt="HSMR" />
+
+To preface, this is a personal research project with no intentions of monetary gain. Please enjoy reading this short blog about my creation process!
+
+
+## The Website
+The bulk of my time for this project was actually focused on the research side of it, but I figured I should have a short section dedicated to the resulting website.
+
+### Design
+My first project was bogged down by signups. I learned my lesson. I wanted to make sure this website was both easy to understand and use for someone who randomly stumbles upon the site.
+
+Thus I maintained a simple interface, with clear instructions.
+
+<BlogImage src={LandingPage} alt="Website's landing page. It contains the site's purpose and descriptions of the datasets"/>
+
+For the searcher itself, I wanted the image layout to be reminiscent of Pinterest. In addition, I needed it to be easy to swap between different datasets and inputs.
+
+<BlogImage src={Searcher} alt="Core pose searcher. It's composed of two primary sections, the searcher and the query output" />
+
+On the input section, the user can choose between modifying the skeleton and uploading a sketch or photograph. 
+
+The primary issue I found with preexisting pose searchers was the ability to control the pose. I hated spending time wrestling with the software. For most sites it's difficult to get both the ability to make broad changes to the pose, as well as, small modifications. That's why I have the sketch-to-pose and photo-to-pose models separate from the skeleton angle modifier.
+
+<BlogImage src={SketchInput} alt="What the sketch input canvas looks like" />
+
+The upload allows users to very quickly establish the rough idea of their pose, while the skeleton angle modifier lets the user choose the exact angle of each anatomical body part.
+
+### Systems Design
+
+
+
+## Research
+
+
+## Development
+/// improvements to development practices, 9 stage ci/cd thing
+
+## Reflection
+
+## Conclusion
+
+## Future Plans
 
