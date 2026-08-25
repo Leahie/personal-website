@@ -18,6 +18,7 @@ import MobileVersion from "@/assets/documents/skellysearch/mobileversion.png";
 import Requirements from "@/assets/documents/skellysearch/requirements.png";
 import CoreEntities from "@/assets/documents/skellysearch/coreentities.png";
 import SystemDiagram from "@/assets/documents/skellysearch/systemdiagram.png";
+import SameAngle from "@/assets/documents/skellysearch/sameangle.png";
 
 This is a project very important for the younger me who wanted to be an artist and wished to have a tool like this.
 
@@ -76,13 +77,19 @@ At a high level the system is very simple. The user fires a query from the front
 
 <BlogImage src={SystemDiagram} alt="System's diagram" />
 
-The search system itself was very fun to design. Typical pose searchers using MediaPipe have precomputed embeddings and use the Euclidean distance between the target pose and the embedding to find the closest poses. Because the HSMR model returns two primary outputs the SKEL angles and the 3D joint position, I decided to do a hybrid search.
+I really enjoyed designing the search system. Typical pose searchers using MediaPipe have precomputed embeddings and use the Euclidean distance between the target pose and the embedding to find the closest poses. Because the HSMR model returns two primary outputs the SKEL angles and the 3D joint position, I decided to do a hybrid search.
 
-/// explain HSMR hybrid search mechanism with HNSW
-The query takes two vectors: 46 SKEL angles and 54 bone-direction floats. I do not use the raw position because there can be confounding effects caused by torso and joint length, instead I use the direction of each bone.
+The query takes two vectors: 46 SKEL angles and 54 bone-direction floats. I do not use the raw position because there can be confounding effects caused by torso and joint length, instead I use the direction of each bone. The system retreives a small pool with two HNSW queries, then rescores that pool using a combination of both signals. 
 
-/// Explain the rotation to deal with camera angle 
-/// Explain the url thing 
+HNSW is a graph index method for approximate nearest neighbors built into the pgvector extension that works faster than a full scan. I decided to use it because I wanted the search to scale as dataset size increases.
+
+<BlogImage src={SameAngle} alt="Different camera angles still result in the same joint angles" />
+
+A fun problem I ran into using the angles as a search metric was the fact that between two camera angles, the joint angles stayed the same. That is, limb angles do not change if you walk around a skeleton, but how the pose looks does.
+
+In order to fix this, I passed a 3x3 camera rotation from the Three.js orbit. Since the body direction primarily follows the box of the pelvis, I only needed to rotate the pelvis params to capture the camera angle.
+
+Another feature of the site is how it stores state. Because I wanted to have the ability to save a specific search, I figured it would be best to have the url translate to the actual embedding. Since the pose is too big to put in the URL as JSON, the binary is zipped and then converted to base 64. 
 
 ## Research
 
