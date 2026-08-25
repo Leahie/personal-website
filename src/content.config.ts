@@ -9,6 +9,7 @@ const projects = defineCollection({
     endDate: z.string(),
     techStack: z.array(z.string()),
     link: z.string().url().optional(),
+    description: z.string().optional(),
   }),
 });
 

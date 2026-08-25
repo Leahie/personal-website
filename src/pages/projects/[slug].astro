@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, startDate, endDate, techStack, link } = project.data;
+const { title, startDate, endDate, techStack, link, description } = project.data;
 const permalink = `/projects/${project.id}`;
 ---
 
@@ -23,6 +23,7 @@ const permalink = `/projects/${project.id}`;
   techStack={techStack}
   permalink={permalink}
   link={link}
+  description={description}
 >
   <Content />
 </ProjectLayout>

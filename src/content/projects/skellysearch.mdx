@@ -7,8 +7,11 @@ techStack:
   - FastAPI
   - AWS
 link: "http://skellysearch.com/"
+description: Sketch to pose art reference finder built with React and FastAPI, hosted on AWS, motivated by lack of anatomically accurate pose searchers.
 ---
 import BlogImage from "@/components/blogimage.astro";
+import PdfEmbed from "@/components/pdfembed.astro";
+
 import GoogleSearch from "@/assets/documents/skellysearch/googlesearch.png";
 import HSMR from "@/assets/documents/skellysearch/hsmr.png";
 import LandingPage from "@/assets/documents/skellysearch/landingpage.png";
@@ -92,6 +95,23 @@ In order to fix this, I passed a 3x3 camera rotation from the Three.js orbit. Si
 Another feature of the site is how it stores state. Because I wanted to have the ability to save a specific search, I figured it would be best to have the url translate to the actual embedding. Since the pose is too big to put in the URL as JSON, the binary is zipped and then converted to base 64. 
 
 ## Research
+This section covers the more researchy part of the project. I realized that my projects didn't have to be only focused on the SWE side and that I could use my personal background to create some custom components.
+
+I'll go over the sketch-to-pose models first and then the distilled model.
+
+### Sketch Models
+
+
+/// image of results acc
+
+
+#### Architecture
+#### Results
+
+### Distilled Model
+
+#### Architecture
+#### Results
 
 
 ## Development
@@ -103,3 +123,17 @@ Another feature of the site is how it stores state. Because I wanted to have the
 
 ## Future Plans
 
+## Project Documentation
+A collection of notes of design ideas I had when I was actually working on the project. Dates are sometimes included, you can see the swap from Mediapipe to HSMR in real time!
+
+<PdfEmbed
+  src="/documents/skellysearch/skellysearch-1.pdf"
+  title="skellysearch document 1"
+  label="Open skellysearch document 1"
+/>
+
+<PdfEmbed
+  src="/documents/skellysearch/skellysearch-2.pdf"
+  title="skellysearch document 2"
+  label="Open skellysearch document 2"
+/>

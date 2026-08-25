@@ -12,9 +12,10 @@ interface Props {
   techStack: string[];
   permalink: string;
   link?: string;
+  description?: string;
 }
 
-const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
+const { title, startDate, endDate, techStack, permalink, link, description } = Astro.props;
 ---
 
 <html lang="en">
@@ -33,8 +34,9 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
         )}
         </h1> 
         
-                <p class="project-dates">{startDate} – {endDate} </p>
-        
+        <p class="project-dates">{startDate} – {endDate} </p>
+        <p class="project-description">{description}</p>
+
         <ul class="project-tech">
           {techStack.map((tech) => (
             <li class="project-tech-item">{tech}</li>
@@ -74,9 +76,15 @@ const { title, startDate, endDate, techStack, permalink, link } = Astro.props;
     color: var(--black);
     font-size: 15px;
     font-weight: 500;
-    margin-bottom: 1rem;
   }
 
+  .project-description {
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--med);
+  }
   .project-tech {
     display: flex;
     flex-wrap: wrap;
