@@ -22,6 +22,7 @@ import Requirements from "@/assets/documents/skellysearch/requirements.png";
 import CoreEntities from "@/assets/documents/skellysearch/coreentities.png";
 import SystemDiagram from "@/assets/documents/skellysearch/systemdiagram.png";
 import SameAngle from "@/assets/documents/skellysearch/sameangle.png";
+import Sketch2Pose from "@/assets/documents/skellysearch/sketch2pose.png";
 
 This is a project very important for the younger me who wanted to be an artist and wished to have a tool like this.
 
@@ -100,12 +101,17 @@ This section covers the more researchy part of the project. I realized that my p
 I'll go over the sketch-to-pose models first and then the distilled model.
 
 ### Sketch Models
+There are preexisting sketch-to-pose models like [Sketch2PoseNet](https://dl.acm.org/doi/10.1145/3757377.3763855) and [Sketch2Pose](https://www-labs.iro.umontreal.ca/~bmpix/sketch2pose/), but the Sketch2PoseNet's models aren't publicly released and I wanted to specialize my model toward one type of sketch input.
 
+Because the goal was to use this sketch assisted pose searching on the website, I figured the sketch needed to be easy and quick to draw using the cursor.
 
-/// image of results acc
+<BlogImage src={Sketch2Pose} alt="Inference results from Heatmap and GAT models " />
 
+So I wanted the input to look like a stick figure and still contain enough information about the pose. Since there wasn't preexisting data for my goal online, I artificially created the data using the [COCO 2014](https://cocodataset.org/#home) dataset (27,237 images) for training and [LSP-EXTENDED](https://dbcollection.readthedocs.io/en/latest/datasets/leeds_sports_pose_extended.html) dataset (9,428 images) for evaluation.
 
 #### Architecture
+/// image of architecture
+
 #### Results
 
 ### Distilled Model
