@@ -23,6 +23,7 @@ import CoreEntities from "@/assets/documents/skellysearch/coreentities.png";
 import SystemDiagram from "@/assets/documents/skellysearch/systemdiagram.png";
 import SameAngle from "@/assets/documents/skellysearch/sameangle.png";
 import Sketch2Pose from "@/assets/documents/skellysearch/sketch2pose.png";
+import Heatmap from "@/assets/documents/skellysearch/heatmap.png";
 
 This is a project very important for the younger me who wanted to be an artist and wished to have a tool like this.
 
@@ -110,7 +111,7 @@ Because the goal was to use this sketch assisted pose searching on the website, 
 So I wanted the input to look like a stick figure and still contain enough information about the pose. Since there wasn't preexisting data for my goal online, I artificially created the data using the [COCO 2014](https://cocodataset.org/#home) dataset (27,237 images) for training and [LSP-EXTENDED](https://dbcollection.readthedocs.io/en/latest/datasets/leeds_sports_pose_extended.html) dataset (9,428 images) for evaluation.
 
 #### Architecture
-/// image of architecture
+<BlogImage src={Heatmap} alt="Heatmap - PoseCNN + SkeletonGNN" />
 
 #### Results
 
