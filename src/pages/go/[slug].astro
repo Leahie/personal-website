@@ -1,0 +1,149 @@
+---
+import Head from '@/components/head.astro';
+import PostHog from '@/components/posthog.astro';
+import { getRedirectRoutes } from '@/lib/redirects';
+import '@/styles/global.scss';
+
+export function getStaticPaths() {
+  return getRedirectRoutes().map((redirect) => ({
+    params: { slug: redirect.slug },
+    props: { redirect },
+  }));
+}
+
+const { redirect } = Astro.props;
+const permalink = `/go/${redirect.slug}`;
+const title = redirect.eventTitle;
+const description = `Redirecting to ${redirect.eventTitle}.`;
+const posthogEnabled = Boolean(import.meta.env.POSTHOG_KEY);
+const goProperties = {
+  go_slug: redirect.slug,
+  go_group: redirect.group ?? 'general',
+  go_event: redirect.event,
+  go_event_title: redirect.eventTitle,
+  go_channel: redirect.channel ?? 'general',
+  go_date: redirect.date,
+  go_destination: redirect.destination,
+};
+---
+
+<html lang="en">
+  <head>
+    <Head
+      title={title}
+      description={description}
+      permalink={permalink}
+      includeRouter={false}
+      noindex={true}
+    />
+    <PostHog />
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=${redirect.destination}`} />
+    </noscript>
+  </head>
+  <body>
+    <main class="redirect-shell">
+      <p>Redirecting to {redirect.eventTitle}...</p>
+      <a id="go-continue" href={redirect.destination}>Continue</a>
+    </main>
+
+    <script
+      is:inline
+      define:vars={{
+        destination: redirect.destination,
+        goProperties,
+        posthogEnabled,
+      }}
+    >
+      let tracked = false;
+      let redirected = false;
+
+      function go() {
+        if (redirected) return;
+        redirected = true;
+        window.location.replace(destination);
+      }
+
+      function capturePosthog(trigger) {
+        if (!window.posthog || typeof window.posthog.capture !== 'function') {
+          return false;
+        }
+
+        window.posthog.register(goProperties);
+        window.posthog.capture(
+          '$pageview',
+          { ...goProperties, go_trigger: trigger },
+          { send_instantly: true, transport: 'sendBeacon' },
+        );
+        window.posthog.capture(
+          'go_redirect',
+          { ...goProperties, go_trigger: trigger },
+          { send_instantly: true, transport: 'sendBeacon' },
+        );
+        return true;
+      }
+
+      function captureGtag() {
+        if (typeof window.gtag !== 'function') return false;
+
+        window.gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          event_callback: go,
+          event_timeout: 400,
+        });
+        return true;
+      }
+
+      function trackThenGo(trigger) {
+        if (tracked) {
+          go();
+          return;
+        }
+        tracked = true;
+
+        const sentPosthog = capturePosthog(trigger);
+        const sentGtag = captureGtag();
+        setTimeout(go, sentPosthog || sentGtag ? 400 : 0);
+      }
+
+      document.getElementById('go-continue')?.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (!tracked) {
+          trackThenGo('continue_click');
+          return;
+        }
+        go();
+      });
+
+      if (posthogEnabled) {
+        window.addEventListener('posthog:ready', () => trackThenGo('auto'), { once: true });
+        setTimeout(() => trackThenGo('auto'), 900);
+      } else if (typeof window.gtag === 'function') {
+        trackThenGo('auto');
+      } else {
+        window.addEventListener('load', () => trackThenGo('auto'), { once: true });
+        setTimeout(() => trackThenGo('auto'), 600);
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .redirect-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    color: var(--med);
+  }
+
+  a {
+    color: var(--light);
+  }
+</style>

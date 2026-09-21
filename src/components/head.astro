@@ -5,12 +5,16 @@ export interface Props {
     title: string;
     description?: string;
     permalink: string;
+    includeRouter?: boolean;
+    noindex?: boolean;
 }
 
 let {
     title,
     description = "",
     permalink,
+    includeRouter = true,
+    noindex = false,
 } = Astro.props;
 
 title = `Leah Z | ${title}`;
@@ -30,6 +34,7 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
@@ -78,4 +83,4 @@ const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
     </>
 )}
 
-<ClientRouter />
+{includeRouter && <ClientRouter />}
