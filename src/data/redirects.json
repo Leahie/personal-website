@@ -6,5 +6,13 @@
       "destination": "https://forms.gle/HYJ4xn2ZjCEtBJqS7",
       "channels": ["linkedin", "instagram", "qr", "listserv"]
     }
+  ],
+  "general": [
+    {
+      "name": "Recruitment",
+      "date": "09-26-2026",
+      "destination": "https://docs.google.com/forms/d/e/1FAIpQLSfMOYckR8N3XaAkZ2B2ZtQqU0Lycnnzuw8w5qufxe21rcjoeA/viewform",
+      "channels": ["linkedin", "instagram", "qr", "listserv"]
+    }
   ]
 }
