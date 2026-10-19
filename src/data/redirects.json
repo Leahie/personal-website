@@ -5,6 +5,12 @@
       "date": "08-01-2026",
       "destination": "https://forms.gle/HYJ4xn2ZjCEtBJqS7",
       "channels": ["linkedin", "instagram", "qr", "listserv"]
+    },
+    {
+      "name": "Roblox Info",
+      "date": "10-22-2026",
+      "destination": "https://campusambassador2026robloxinfo.splashthat.com/",
+      "channels": ["linkedin", "instagram", "qr", "listserv"]
     }
   ],
   "general": [
